@@ -8,7 +8,7 @@ class App extends React.Component {
   state = {
     newName: '',
     newAge: 0,
-    users: []
+    users: {}
   };
 
   setName = async (name) => {
@@ -20,26 +20,52 @@ class App extends React.Component {
   }
 
   createUser = async () => {
-    await addDoc(collection(db, "users"), {
-      name: this.state.newName, 
-      age: Number(this.state.newAge)
+    const name = this.state.newName;
+    const age = Number(this.state.newAge);
+    let newId = await addDoc(collection(db, "users"), {
+      name: name, 
+      age: age
+    })
+    .then(function(docRef) {
+      return docRef.id;
+    })
+    .catch(function(error) {
+        console.error("Error adding document: ", error);
     });
+    const users = { ...this.state.users };
+    users[newId] = {name: name, age: age, id: newId};
+    this.setState({ users });
+
   };
 
   upddateUser = async (id, age) => {
-    const newFields = {age: age + 1}
+    const updatedAge = age + 1
+    const newFields = {age: updatedAge}
     await updateDoc(doc(db, "users", id), newFields)
+    const users = { ...this.state.users };
+    let name = users[id].name;
+    users[id] = {name: name, age: updatedAge, id: id};
+    this.setState({ users });
   }
 
   deleteUser = async (id) => {
     await deleteDoc(doc(db, "users", id));
+    const users = { ...this.state.users };
+    delete users[id];
+    this.setState({ users });
   };
 
 
   componentDidMount = async () => {
     const data = await getDocs(collection(db, "users"));
+    let tempUsers = {}
+    for (let i = 0; i < data.docs.length; i++) {
+      let docId = data.docs[i].id
+      tempUsers[docId] = {...data.docs[i].data(), id: docId}
+    }
+    console.log(tempUsers)
     this.setState({
-      users: data.docs.map((doc) => ({...doc.data(), id: doc.id }))  
+      users: tempUsers
     });
   }
 
@@ -61,19 +87,20 @@ class App extends React.Component {
           }}
         />
         <button onClick={this.createUser}>Create User</button>
-        {this.state.users.map((user) => {
+        {Object.keys(this.state.users).map(userId => {
+          const thisUser = this.state.users[userId];
           return(
-            <div key={user.id}>
+            <div key={userId}>
               {" "}
-              <h1>Name: {user.name}</h1>
-              <h1>Age: {user.age}</h1>
+              <h1>Name: {thisUser.name}</h1>
+              <h1>Age: {thisUser.age}</h1>
               <button 
                 onClick={() => {
-                  this.upddateUser(user.id, user.age);
+                  this.upddateUser(userId, thisUser.age);
                 }}>
                 Increase Age
               </button>
-              <button onClick={() => {this.deleteUser(user.id)}}>Delete User</button>
+              <button onClick={() => {this.deleteUser(userId)}}>Delete User</button>
             </div>
           );
         })}
