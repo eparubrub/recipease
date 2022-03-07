@@ -1,9 +1,11 @@
 import React from "react";
-import '../css/App.css';
 import { db } from '../firebase-config';
 import { Link } from "react-router-dom";
 import Recipe from "./Recipe";
+import Navbar from "./Navbar";
 import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc} from 'firebase/firestore';
+import '../css/global.css';
+import '../css/recipe.css';
 
 
 class App extends React.Component {
@@ -37,7 +39,6 @@ class App extends React.Component {
       let docId = recipesData.docs[i].id
       tempRecipes[docId] = {...recipesData.docs[i].data(), id: docId}
     }
-    console.log(tempRecipes)
     this.setState({
       recipes: tempRecipes
     });
@@ -47,7 +48,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Link to="/addRecipe">add a recipe</Link>
+        {Navbar("All Recipes", "addRecipe")}
         {Object.keys(this.state.recipes).map(key => (
           <Recipe
             key={key}

@@ -1,0 +1,11 @@
+.recipeContainerSmall{
+  height: 150px;
+  width: 400px;
+  border-radius: 25px;
+  border: 2px solid var(--color-brand);
+  padding: 20px;
+}
+
+/* .recipeInput{
+
+} */

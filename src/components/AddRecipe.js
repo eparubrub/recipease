@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { collection, addDoc} from 'firebase/firestore';
 import { db } from '../firebase-config';
+import Navbar from "./Navbar";
+
 
 
 class AddRecipe extends React.Component{
@@ -47,9 +49,9 @@ class AddRecipe extends React.Component{
     render(){
         return (
             <div>
-                <Link to="/">Go back</Link>
+                {Navbar("Add Recipe", "home")}
                 <form >
-                    <input placeholder="Name..." onChange={(event) => {this.setRecipeName(event.target.value)}}/>
+                    <input className="recipeInput" placeholder="Name..." onChange={(event) => {this.setRecipeName(event.target.value)}}/>
                     <input placeholder="Diet..." onChange={(event) => {this.setRecipeDiet(event.target.value)}}/>
                     <input placeholder="Cuisine..." onChange={(event) => {this.setRecipeCuisine(event.target.value)}}/>
                     <input placeholder="Difficulty..." onChange={(event) => {this.setRecipeDifficulty(event.target.value)}}/>
