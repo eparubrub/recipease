@@ -70,4 +70,26 @@ h1, h2, h3, h4{
   position: absolute;
 }
 
+.navbar-button {
+  border-radius: 20px;
+  background-color: var(--color-brand);
+  min-height: 40px;
+  height: 40%;
+  max-width: 100px;
+  width: 30%;
+  top: 0;
+  bottom: 0;
+  left: 20px;
+  margin: auto;
+  position: absolute;
+  text-align: center;
+  font-weight: 400;
+  font-size: 1.2em;
+  color: var(--color-background);
+  display: flex;
+  font-family: 'Nunito';
+  flex-direction: column;
+  justify-content: center;
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;400;600;800&family=Roboto&display=swap');

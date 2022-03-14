@@ -1,8 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { collection, addDoc} from 'firebase/firestore';
-import { db } from '../firebase-config';
-import Navbar from "./Navbar";
+import { db } from '../firebase';
 
 
 
@@ -49,7 +48,15 @@ class AddRecipe extends React.Component{
     render(){
         return (
             <div>
-                {Navbar("Add Recipe", "home")}
+                <div className="navbar-container">
+                    <div className="navbar-top">
+                    <div className="navbar-center-text">Add Recipe</div>
+                        <Link to="/home">
+                            <img src={"/images/back-arrow.png"} className="navbar-back" alt="back icon"/>
+                        </Link>
+                    </div>
+                    <div className="navbar-bottom"/>
+                </div>
                 <form >
                     <input className="recipeInput" placeholder="Name..." onChange={(event) => {this.setRecipeName(event.target.value)}}/>
                     <input placeholder="Diet..." onChange={(event) => {this.setRecipeDiet(event.target.value)}}/>

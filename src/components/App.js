@@ -1,12 +1,25 @@
 import React from "react";
-import { db } from '../firebase-config';
+import { db } from '../firebase';
 import { Link } from "react-router-dom";
 import Recipe from "./Recipe";
-import Navbar from "./Navbar";
 import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc} from 'firebase/firestore';
 import '../css/global.css';
 import '../css/recipe.css';
+import { Redirect, Navigate, useNavigate } from "react-router";
+import { signOutWithGoogle } from "../firebase";
 
+
+const SignOutButton = () => {
+  let navigate = useNavigate();
+  function handleButton() {
+    signOutWithGoogle(navigate)
+  }
+  return (
+    <button className="navbar-button" onClick={handleButton}>
+      Logout
+    </button>
+  );
+}
 
 class App extends React.Component {
   state = {
@@ -31,9 +44,9 @@ class App extends React.Component {
     this.setState({ recipes });
   };
 
-
   componentDidMount = async () => {
-    const recipesData = await getDocs(collection(db, "recipes"));
+    // const recipesData = await getDocs(collection(db, "recipes"));
+    const recipesData = null;
     const tempRecipes = {}
     for (let i = 0; i < recipesData.docs.length; i++) {
       let docId = recipesData.docs[i].id
@@ -44,11 +57,23 @@ class App extends React.Component {
     });
   }
 
-
   render() {
     return (
       <div className="App">
-        {Navbar("All Recipes", "addRecipe")}
+        <div className="navbar-container">
+          <div className="navbar-top">
+          <div className="navbar-center-text">All Recipes</div>
+              <SignOutButton/>
+              <Link to="/addRecipe">
+                <img 
+                  className="navbar-add-recipe" 
+                  src={"/images/add-recipe.png"} 
+                  alt="add recipe icon"
+                />
+              </Link>
+          </div>
+          <div className="navbar-bottom"/>
+        </div>
         {Object.keys(this.state.recipes).map(key => (
           <Recipe
             key={key}
