@@ -5,7 +5,7 @@ import Recipe from "./Recipe";
 import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc} from 'firebase/firestore';
 import '../css/global.css';
 import '../css/recipe.css';
-import { Redirect, Navigate, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import { signOutWithGoogle } from "../firebase";
 
 
@@ -45,8 +45,7 @@ class App extends React.Component {
   };
 
   componentDidMount = async () => {
-    // const recipesData = await getDocs(collection(db, "recipes"));
-    const recipesData = null;
+    const recipesData = await getDocs(collection(db, "recipes"));
     const tempRecipes = {}
     for (let i = 0; i < recipesData.docs.length; i++) {
       let docId = recipesData.docs[i].id
