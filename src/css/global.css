@@ -1,7 +1,7 @@
 :root {
   --color-brand: #406343;
   --color-background: #ECEAD8;
-
+  --color-white: whitesmoke;
 }
 
 * {
@@ -18,6 +18,46 @@ h1, h2, h3, h4{
   font-weight: bold;
   color: var(--color-brand);
 }
+
+p {
+  font-family: 'Nunito', sans-serif;
+  color: var(--color-brand);
+  font-size: 1.1em;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: var(--color-brand);
+  opacity: .3; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: var(--color-brand);
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+  color: var(--color-brand);
+}
+
+
+/* Middle component */
+.middle-centered-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  
+  /* this is what centers your element in the fixed wrapper*/
+  display: flex;
+  /* flex-flow: column nowrap; */
+  justify-content: center; /* aligns on vertical for column */
+  align-items: center; /* aligns on horizontal for column */
+  
+  /* just for styling to see the limits */
+  /* border: 2px dashed red;
+  box-sizing: border-box; */
+}
+
 
 /* Navbar
  ----------------------------- */
@@ -72,6 +112,8 @@ h1, h2, h3, h4{
 
 .navbar-button {
   border-radius: 20px;
+  border-style: solid;
+  border-color: var(--color-brand);
   background-color: var(--color-brand);
   min-height: 40px;
   height: 40%;
@@ -85,11 +127,26 @@ h1, h2, h3, h4{
   text-align: center;
   font-weight: 400;
   font-size: 1.2em;
-  color: var(--color-background);
+  color: var(--color-white);
   display: flex;
   font-family: 'Nunito';
   flex-direction: column;
   justify-content: center;
 }
 
+
+
+/* Responsive
+ ----------------------------- */
+ @media screen and (max-width: 1150px) {
+
+}
+ @media screen and (max-width: 800px) {
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;400;600;800&family=Roboto&display=swap');
+
+
+
+
+

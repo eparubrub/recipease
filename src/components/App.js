@@ -15,9 +15,7 @@ const SignOutButton = () => {
     signOutWithGoogle(navigate)
   }
   return (
-    <button className="navbar-button" onClick={handleButton}>
-      Logout
-    </button>
+    <button className="navbar-button middle-centered-container" onClick={handleButton}>Logout</button>
   );
 }
 
