@@ -23,7 +23,7 @@ const SignIn = () => {
         <div className="middle-centered-container">
           <div className="sign-in-wrapper">
             <h1>Welcome to Recipease</h1>
-            <p>Enter the password below and sign in to get started</p>
+            <p>Provide the early access password and sign in to get started</p>
             <input className="sign-in-input" type="password" name="password" id="password" placeholder="Password"/>
             <button className="middle-centered" onClick={handleButton}>Sign in with Google</button>
           </div>

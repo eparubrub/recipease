@@ -42,7 +42,6 @@ class AddRecipe extends React.Component{
         .catch(function(error) {
             console.error("Error adding document: ", error);
         });
-        console.log("Created recipe with Id:", newId);
       };
       
     render(){

@@ -20,12 +20,10 @@ export const db = getFirestore();
 export const signInWithGoogle = (navigate) => {
   signInWithPopup(auth, provider)
     .then((result) => {
-      console.log(result);
       sessionStorage.setItem('user', result.user.displayName)
       navigate('/home')
     })
     .catch((error) => {
-      console.log(error);
     })
 };
 export const signOutWithGoogle = (navigate) => {
