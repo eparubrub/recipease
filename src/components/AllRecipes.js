@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 import Recipe from "./Recipe";
 import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc} from 'firebase/firestore';
 import '../css/global.css';
-import '../css/recipe.css';
+import '../css/Recipe.css';
+import '../css/AllRecipes.css';
 import { useNavigate } from "react-router";
 import { signOutWithGoogle } from "../firebase";
 
@@ -19,7 +20,7 @@ const SignOutButton = () => {
   );
 }
 
-class App extends React.Component {
+class AllRecipes extends React.Component {
   state = {
     recipes: {}
   };
@@ -56,7 +57,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="App">
+      <div>
         <div className="navbar-container">
           <div className="navbar-top">
           <div className="navbar-center-text">All Recipes</div>
@@ -71,17 +72,21 @@ class App extends React.Component {
           </div>
           <div className="navbar-bottom"/>
         </div>
-        {Object.keys(this.state.recipes).map(key => (
-          <Recipe
-            key={key}
-            id={key}
-            details={this.state.recipes[key]}
-            deleteRecipe={this.deleteRecipe}
-          />
-        ))}
+        <div className="middle-centered-container">
+          <div className="all-recipes-middle-wrapper">
+            {Object.keys(this.state.recipes).map(key => (
+            <Recipe
+              key={key}
+              id={key}
+              details={this.state.recipes[key]}
+              deleteRecipe={this.deleteRecipe}
+            />
+            ))}
+          </div>
+        </div>
       </div>
     );
   }
 }
 
-export default App;
+export default AllRecipes;

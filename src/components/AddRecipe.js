@@ -30,7 +30,7 @@ class AddRecipe extends React.Component{
     }
 
     createRecipe = async () => {
-        let newId = await addDoc(collection(db, "recipes"), {
+        await addDoc(collection(db, "recipes"), {
           name: this.state.name, 
           cuisine: this.state.cuisine,
           diet: this.state.diet,

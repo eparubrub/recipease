@@ -20,7 +20,7 @@ const SignIn = () => {
     }
     return (
     <div className="button-container">
-        <div className="middle-centered-container">
+        <div style={{"position": "fixed"}} className="middle-centered-container">
           <div className="sign-in-wrapper">
             <h1>Welcome to Recipease</h1>
             <p>Provide the early access password and sign in to get started</p>

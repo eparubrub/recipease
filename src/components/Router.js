@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import App from "./App";
+import AllRecipes from "./AllRecipes";
 import SignIn from "./SignIn";
 import AddRecipe from "./AddRecipe";
 import NotFound from "./NotFound";
@@ -12,7 +12,7 @@ const Router = () => (
       <Route element={<PrivateRoute/>}>
           <Route path="/addRecipe" element={<AddRecipe/>}/>
       </Route>
-      <Route path='/home' element={<App/>}/>
+      <Route path='/home' element={<AllRecipes/>}/>
       <Route path="/login" element={<SignIn/>}/>
       <Route path="/" element={<SignIn/>}/>
       {/* <Route path="/page/:pageId" component={App} /> */}

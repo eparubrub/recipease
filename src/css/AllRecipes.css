@@ -1,0 +1,9 @@
+.all-recipes-middle-wrapper{
+    display: flex;
+    width: 75%;
+    height: auto;
+    flex-flow: row wrap;
+    /* border: 2px dashed red; */
+    justify-content: center;
+
+}
