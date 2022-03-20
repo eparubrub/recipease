@@ -3,7 +3,6 @@
     width: 75%;
     height: auto;
     flex-flow: row wrap;
-    /* border: 2px dashed red; */
     justify-content: center;
-
+    /* border: 2px dashed red; */
 }
