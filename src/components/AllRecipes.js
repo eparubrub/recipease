@@ -2,9 +2,9 @@ import React from "react";
 import { db } from '../firebase';
 import { Link } from "react-router-dom";
 import Recipe from "./Recipe";
-import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc} from 'firebase/firestore';
+import { collection, getDocs, updateDoc, deleteDoc, doc} from 'firebase/firestore';
 import '../css/global.css';
-import '../css/Recipe.css';
+import '../css/recipe.css';
 import '../css/AllRecipes.css';
 import { useNavigate } from "react-router";
 import { signOutWithGoogle } from "../firebase";
@@ -75,12 +75,12 @@ class AllRecipes extends React.Component {
         <div className="middle-centered-container">
           <div className="all-recipes-middle-wrapper">
             {Object.keys(this.state.recipes).map(key => (
-            <Recipe
-              key={key}
-              id={key}
-              details={this.state.recipes[key]}
-              deleteRecipe={this.deleteRecipe}
-            />
+              <Recipe
+                key={key}
+                id={key}
+                details={this.state.recipes[key]}
+                deleteRecipe={this.deleteRecipe}
+              />
             ))}
           </div>
         </div>

@@ -1,5 +1,6 @@
 :root {
   --color-brand: #406343;
+  --color-brand-light: #52734D;
   --color-background: #ECEAD8;
   --color-white: whitesmoke;
 }
@@ -17,6 +18,12 @@ h1, h2, h3, h4{
   font-family: 'Nunito Sans', sans-serif;
   font-weight: bold;
   color: var(--color-brand);
+}
+
+button:hover{
+  border-color: var(--color-brand-light);
+  background-color: var(--color-brand-light);
+  cursor: pointer;
 }
 
 p {
@@ -145,11 +152,41 @@ p {
   .navbar-center-text {
     font-size: 1.5em;
   }
+  .navbar-button{
+    height: 15px;
+    width: 70px;
+    left: 10px;
+    font-weight: 400;
+    font-size: 1em;
+  }
+  .navbar-add-recipe {
+    height: 30%;
+    right: 10px;
+  }
+  .navbar-back {
+    height: 30%;
+    left: 10px;
+  }
 }
 
 @media screen and (max-height: 600px) {
   .navbar-center-text {
     font-size: 1.5em;
+  }
+  .navbar-button{
+    height: 15px;
+    width: 70px;
+    left: 10px;
+    font-weight: 400;
+    font-size: 1em;
+  }
+  .navbar-add-recipe {
+    height: 30%;
+    right: 10px;
+  }
+  .navbar-back {
+    height: 30%;
+    left: 10px;
   }
 }
 

@@ -37,6 +37,11 @@ button.middle-centered {
   font-size: .9em;
 }
 
+button.middle-centered:hover {
+  border-color: var(--color-brand-light);
+  background-color: var(--color-brand-light);
+}
+
 
 /* Responsive
  ----------------------------- */
