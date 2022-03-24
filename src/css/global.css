@@ -157,7 +157,7 @@ p {
     width: 70px;
     left: 10px;
     font-weight: 400;
-    font-size: 1em;
+    font-size: .9em;
   }
   .navbar-add-recipe {
     height: 30%;
@@ -178,7 +178,7 @@ p {
     width: 70px;
     left: 10px;
     font-weight: 400;
-    font-size: 1em;
+    font-size: .9em;
   }
   .navbar-add-recipe {
     height: 30%;

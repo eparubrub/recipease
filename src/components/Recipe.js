@@ -15,13 +15,25 @@ class Recipe extends React.Component {
   render() {
     const { name, cuisine, diet, difficulty } = this.props.details;
     return (
-      <div className="recipeContainerSmall">
+      <div className="recipe-container-small">
         {/* <img src={image} alt={name} /> */}
-        <h3>name: {name}</h3>
-        <h3>cuisine: {cuisine}</h3>
-        <h3>diet: {diet}</h3>
-        {/* <h3>difficulty: {difficulty}</h3> */}
-        <button onClick={() => this.props.deleteRecipe(this.props.id)}>Delete Recipe</button>
+        <div className="recipe-image">Recipe Image</div>
+        <div className="recipe-data-container">
+          <h3 className="recipe-title">{name}</h3>
+          <div className="recipe-split-columns">
+            <div className="recipe-column">
+              <p>Ingredient: </p>
+              <p className="recipe-data">Cooking Time:</p>
+              <p>Origin: {cuisine}</p>
+            </div>
+            <div className="recipe-column">
+              <p>Diet: {diet}</p>
+              <p>Difficulty: {difficulty} </p>
+              <p>Likes:</p>
+            </div>
+          </div>
+          <button onClick={() => this.props.deleteRecipe(this.props.id)}>Delete Recipe</button>
+        </div>
       </div>
     );
   }
