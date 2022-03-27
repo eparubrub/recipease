@@ -1,7 +1,7 @@
 import React from "react";
 import { db } from '../firebase';
 import { Link } from "react-router-dom";
-import Recipe from "./Recipe";
+import Recipe from "../components/Recipe";
 import { collection, getDocs, updateDoc, deleteDoc, doc} from 'firebase/firestore';
 import '../css/global.css';
 import '../css/recipe.css';

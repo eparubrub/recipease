@@ -20,33 +20,57 @@ const input = (recipeName, recipePlaceholder, recipeEvent) => {
 
 class AddRecipe extends React.Component{
     state = {
-      name: '',
-      diet: '',
+      cookingTime: '',
       cuisine: '',
+      diet: '',
       difficulty: '',
+      directions: '',
+      ingredients: '',
+      ingredientCount: '',
+      name: '',
     }
 
-    setRecipeName = async (name) => {
-      this.setState({name: name});
-    }
-    
-    setRecipeDiet = async (diet) => {
-      this.setState({diet: diet});
+    setRecipeCookingTime = async (cookingTime) => {
+      this.setState({cookingTime: cookingTime});
     }
 
     setRecipeCuisine = async (cuisine) => {
       this.setState({cuisine: cuisine});
     }
 
+    setRecipeDiet = async (diet) => {
+      this.setState({diet: diet});
+    }
+
     setRecipeDifficulty = async (difficulty) => {
       this.setState({difficulty: difficulty});
     }
 
+    setRecipeDirections = async (directions) => {
+      this.setState({directions: directions});
+    }
+
+    setRecipeIngredients = async (ingredients) => {
+      this.setState({ingredients: ingredients});
+    }
+    
+    setRecipeIngredientCount = async (ingredientCount) => {
+      this.setState({ingredientCount: ingredientCount});
+    }
+
+    setRecipeName = async (name) => {
+      this.setState({name: name});
+    }
+    
     resetForm = () => {
-      this.setState({name: ""});
+      this.setState({cookingTime: ""});
       this.setState({cuisine: ""});
       this.setState({diet: ""});
       this.setState({difficulty: ""});
+      this.setState({directions: ""});
+      this.setState({ingredients: ""});
+      this.setState({ingredientCount: ""});
+      this.setState({name: ""});
       let inputs = document.getElementsByClassName("recipe-input");
       for (let i = 0; i < inputs.length; i++) {
         let element = inputs[i]
@@ -56,10 +80,14 @@ class AddRecipe extends React.Component{
 
     createRecipe = async () => {
         await addDoc(collection(db, "recipes"), {
-          name: this.state.name, 
+          cookingTime: this.state.cookingTime,
           cuisine: this.state.cuisine,
           diet: this.state.diet,
-          difficulty: this.state.difficulty
+          difficulty: this.state.difficulty,
+          directions: this.state.directions,
+          ingredients: this.state.ingredients,
+          ingredientCount: this.state.ingredientCount,
+          name: this.state.name, 
         })
         .then(function(docRef) {
           console.log("Successfully created new recipe with ID", docRef.id)
@@ -86,9 +114,13 @@ class AddRecipe extends React.Component{
                 <div className="middle-centered-container">
                     <div className="add-recipe-middle-wrapper">
                         {input("Name", "Haulolo", this.setRecipeName)}
-                        {input("Diet", "Vegetarian", this.setRecipeDiet)}
-                        {input("Cuisine", "Hawaiian", this.setRecipeCuisine)}
+                        {input("Ingredients", "Rice", this.setRecipeIngredients)}
+                        {input("Ingredient Count", "1", this.setRecipeIngredientCount)}
+                        {input("Directions", "Cook this", this.setRecipeDirections)}
+                        {input("Cooking Time", "15 minutes", this.setRecipeCookingTime)}
                         {input("Difficulty", "Very Difficult", this.setRecipeDifficulty)}
+                        {input("Cuisine", "Hawaiian", this.setRecipeCuisine)}
+                        {input("Diet", "Vegetarian", this.setRecipeDiet)}
                         <button className="recipe-submit" onClick={this.createRecipe}>Create Recipe</button>
                     </div>
                 </div>

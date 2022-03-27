@@ -1,9 +1,9 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import AllRecipes from "./AllRecipes";
-import SignIn from "./SignIn";
-import AddRecipe from "./AddRecipe";
-import NotFound from "./NotFound";
+import AllRecipes from "../pages/AllRecipes";
+import SignIn from "../pages/SignIn";
+import AddRecipe from "../pages/AddRecipe";
+import NotFound from "../pages/NotFound";
 import PrivateRoute from "./PrivateRoute";
 
 const Router = () => (
