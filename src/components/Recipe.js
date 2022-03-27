@@ -22,14 +22,26 @@ class Recipe extends React.Component {
           <h3 className="recipe-title">{name}</h3>
           <div className="recipe-split-columns">
             <div className="recipe-column">
-              <p>Ingredient: </p>
-              <p className="recipe-data">Cooking Time:</p>
-              <p>Origin: {cuisine}</p>
+              <div>
+                <img src={"/images/ingredients.png"} className="recipe-icon" alt="recipe icon"/>
+                <p className="recipe-text-small">ingredients</p>
+              </div>
+              <div>
+                <img src={"/images/cook-time.png"} className="recipe-icon" alt="recipe icon"/>
+                <p className="recipe-text-small">cooking time</p>
+              </div>
             </div>
             <div className="recipe-column">
-              <p>Diet: {diet}</p>
-              <p>Difficulty: {difficulty} </p>
-              <p>Likes:</p>
+              {/* <p>Diet: {diet}</p> */}
+              {/* <p>Difficulty: {difficulty} </p> */}
+              <div>
+                <img src={"/images/cuisine.png"} className="recipe-icon" alt="recipe icon"/>
+                <p className="recipe-text-small">cuisine</p>
+              </div>
+              <div>
+                <img src={"/images/likes.png"} className="recipe-icon" alt="recipe icon"/>
+                <p className="recipe-text-small">likes</p>
+              </div>
             </div>
           </div>
           <button onClick={() => this.props.deleteRecipe(this.props.id)}>Delete Recipe</button>

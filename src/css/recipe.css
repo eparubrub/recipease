@@ -43,3 +43,17 @@
   flex: 50%;
 }
 
+.recipe-icon{
+  width: 25px;
+  height: 25px;
+  position: relative;
+  top: 5px;
+}
+
+.recipe-text-small{
+  font-size: 1em;
+  position: relative;
+  left: 10px;
+  display: inline-block;
+}
+
