@@ -30,7 +30,6 @@ class AllRecipes extends React.Component {
     const sampleRecipe = MockRecipe();
     const recipes = { ...this.state.recipes};
     recipes[sampleRecipe.id] = sampleRecipe;
-    console.log(recipes);
     this.setState({ recipes });
   };
 
@@ -51,7 +50,6 @@ class AllRecipes extends React.Component {
       this.setState({
         recipes: tempRecipes
       });
-      console.log(this.state.recipes)
   }
 
   componentDidMount = async () => {
@@ -68,14 +66,12 @@ class AllRecipes extends React.Component {
           <div className="navbar-center-text">All Recipes</div>
               <SignOutButton/>
               <button 
-                className="navbar-button middle-centered-container" 
+                className="navbar-button middle-centered-container firebase-button" 
                 onClick={this.PopulateFromFirebase}
-                style={{"left": "125px"}}
               >Firebase</button>
               <button 
-                className="navbar-button middle-centered-container" 
+                className="navbar-button middle-centered-container testdata-button" 
                 onClick={this.addTestRecipe}
-                style={{"left": "230px"}}
               >Testdata</button>
               <Link to="/addRecipe">
                 <img 

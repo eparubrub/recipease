@@ -11,13 +11,14 @@ class Recipe extends React.Component {
       directions: PropTypes.string,
       ingredients: PropTypes.string,
       ingredientCount: PropTypes.string,
+      likes: PropTypes.string,
       name: PropTypes.string,
     }),
     deleteRecipe: PropTypes.func,
     id: PropTypes.string
   }; 
   render() {
-    const { cuisine, cookingTime, diet, difficulty, directions, ingredients, ingredientCount, name} = this.props.details;
+    const { cuisine, cookingTime, diet, difficulty, directions, ingredients, ingredientCount, likes, name} = this.props.details;
     return (
       <div className="recipe-container-small">
         {/* <img src={image} alt={name} /> */}
@@ -35,7 +36,7 @@ class Recipe extends React.Component {
                 <p className="recipe-text-small">{cookingTime}</p>
               </div>
             </div>
-            <div className="recipe-column" style={{"marginLeft": "15px"}}>
+            <div className="recipe-column">
               {/* <p>Diet: {diet}</p> */}
               {/* <p>Difficulty: {difficulty} </p> */}
               <div>
@@ -44,7 +45,7 @@ class Recipe extends React.Component {
               </div>
               <div>
                 <img src={"/images/likes.png"} className="recipe-icon" alt="recipe icon"/>
-                <p className="recipe-text-small">0 likes</p>
+                <p className="recipe-text-small">{likes} likes</p>
               </div>
             </div>
           </div>
