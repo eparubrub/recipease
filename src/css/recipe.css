@@ -1,6 +1,8 @@
 .recipe-container-small{
   height: 200px;
   width: 500px;
+  min-height: 200px;
+  min-width: 500px;
   border-radius: 20px;
   border: 3.5px solid var(--color-brand);
   margin: 10px;

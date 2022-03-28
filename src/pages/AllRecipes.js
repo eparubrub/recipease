@@ -8,6 +8,7 @@ import '../css/recipe.css';
 import '../css/AllRecipes.css';
 import { useNavigate } from "react-router";
 import { signOutWithGoogle } from "../firebase";
+import MockRecipe from "../functions/MockRecipe";
 
 
 const SignOutButton = () => {
@@ -25,34 +26,38 @@ class AllRecipes extends React.Component {
     recipes: {}
   };
 
-  // * Deprecated update example *
-  // upddateUser = async (id, age) => {
-  //   const updatedAge = age + 1
-  //   const newFields = {age: updatedAge}
-  //   await updateDoc(doc(db, "users", id), newFields)
-  //   const users = { ...this.state.users };
-  //   let name = users[id].name;
-  //   users[id] = {name: name, age: updatedAge, id: id};
-  //   this.setState({ users });
-  // }
+  addTestRecipe = async () => {
+    const sampleRecipe = MockRecipe();
+    const recipes = { ...this.state.recipes};
+    recipes[sampleRecipe.id] = sampleRecipe;
+    console.log(recipes);
+    this.setState({ recipes });
+  };
 
   deleteRecipe = async (id) => {
     await deleteDoc(doc(db, "recipes", id));
-    const recipes = { ...this.state.recipes };
+    const recipes = { ...this.state.recipes};
     delete recipes[id];
     this.setState({ recipes });
   };
 
+  PopulateFromFirebase = async () => {
+      const recipesData = await getDocs(collection(db, "recipes"));
+      const tempRecipes = {}
+      for (let i = 0; i < recipesData.docs.length; i++) {
+        let docId = recipesData.docs[i].id
+        tempRecipes[docId] = {...recipesData.docs[i].data(), id: docId}
+      }
+      this.setState({
+        recipes: tempRecipes
+      });
+      console.log(this.state.recipes)
+  }
+
   componentDidMount = async () => {
-    const recipesData = await getDocs(collection(db, "recipes"));
-    const tempRecipes = {}
-    for (let i = 0; i < recipesData.docs.length; i++) {
-      let docId = recipesData.docs[i].id
-      tempRecipes[docId] = {...recipesData.docs[i].data(), id: docId}
+    if (process.env.REACT_APP_DEV_OR_ENV !== "dev") {
+      this.PopulateFromFirebase();
     }
-    this.setState({
-      recipes: tempRecipes
-    });
   }
 
   render() {
@@ -62,6 +67,16 @@ class AllRecipes extends React.Component {
           <div className="navbar-top">
           <div className="navbar-center-text">All Recipes</div>
               <SignOutButton/>
+              <button 
+                className="navbar-button middle-centered-container" 
+                onClick={this.PopulateFromFirebase}
+                style={{"left": "125px"}}
+              >Firebase</button>
+              <button 
+                className="navbar-button middle-centered-container" 
+                onClick={this.addTestRecipe}
+                style={{"left": "230px"}}
+              >Testdata</button>
               <Link to="/addRecipe">
                 <img 
                   className="navbar-add-recipe" 
