@@ -49,7 +49,7 @@ class Recipe extends React.Component {
               </div>
             </div>
           </div>
-          <button onClick={() => this.props.deleteRecipe(this.props.id)}>Delete Recipe</button>
+          <button className="recipeDelete" onClick={() => this.props.deleteRecipe(this.props.id)}>Delete Recipe</button>
         </div>
       </div>
     );

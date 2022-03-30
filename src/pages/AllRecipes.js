@@ -21,6 +21,24 @@ const SignOutButton = () => {
   );
 }
 
+const getDevButtons = (populateFromFirebase, addTestRecipe) => {
+  if (process.env.REACT_APP_DEV_OR_ENV === "dev") {
+    return(
+      <div>
+        <button 
+          className="navbar-button middle-centered-container firebase-button" 
+          onClick={populateFromFirebase}
+        >Firebase</button>
+        <button 
+          className="navbar-button middle-centered-container testdata-button" 
+          onClick={addTestRecipe}
+        >Testdata</button>
+      </div>
+    )
+  }
+}
+
+
 class AllRecipes extends React.Component {
   state = {
     recipes: {}
@@ -40,7 +58,7 @@ class AllRecipes extends React.Component {
     this.setState({ recipes });
   };
 
-  PopulateFromFirebase = async () => {
+  populateFromFirebase = async () => {
       const recipesData = await getDocs(collection(db, "recipes"));
       const tempRecipes = {}
       for (let i = 0; i < recipesData.docs.length; i++) {
@@ -54,9 +72,11 @@ class AllRecipes extends React.Component {
 
   componentDidMount = async () => {
     if (process.env.REACT_APP_DEV_OR_ENV !== "dev") {
-      this.PopulateFromFirebase();
+      this.populateFromFirebase();
     }
   }
+
+
 
   render() {
     return (
@@ -65,14 +85,7 @@ class AllRecipes extends React.Component {
           <div className="navbar-top">
           <div className="navbar-center-text">All Recipes</div>
               <SignOutButton/>
-              <button 
-                className="navbar-button middle-centered-container firebase-button" 
-                onClick={this.PopulateFromFirebase}
-              >Firebase</button>
-              <button 
-                className="navbar-button middle-centered-container testdata-button" 
-                onClick={this.addTestRecipe}
-              >Testdata</button>
+              {getDevButtons(this.populateFromFirebase, this.addTestRecipe)}
               <Link to="/addRecipe">
                 <img 
                   className="navbar-add-recipe" 

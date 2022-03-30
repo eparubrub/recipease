@@ -28,6 +28,7 @@ class AddRecipe extends React.Component{
       ingredients: '',
       ingredientCount: '',
       name: '',
+      // img: null
     }
 
     setRecipeCookingTime = async (cookingTime) => {
@@ -61,7 +62,17 @@ class AddRecipe extends React.Component{
     setRecipeName = async (name) => {
       this.setState({name: name});
     }
+
+    // uploadImage = async (img) => {
+    //   this.setState({img: img});
+    // }
     
+    // chooseImage = e => {
+    //   if (e.target.files[0]){
+
+    //   }
+    // }
+
     resetForm = () => {
       this.setState({cookingTime: ""});
       this.setState({cuisine: ""});
@@ -121,6 +132,8 @@ class AddRecipe extends React.Component{
                         {input("Difficulty", "Very Difficult", this.setRecipeDifficulty)}
                         {input("Cuisine", "Hawaiian", this.setRecipeCuisine)}
                         {input("Diet", "Vegetarian", this.setRecipeDiet)}
+                        {/* <input type="file" onChange={this.chooseImage}/> */}
+                        {/* <button className="recipe-submit" onClick={this.uploadImage}>Upload</button> */}
                         <button className="recipe-submit" onClick={this.createRecipe}>Create Recipe</button>
                     </div>
                 </div>
