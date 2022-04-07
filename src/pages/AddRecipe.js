@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { collection, addDoc} from 'firebase/firestore';
-import { db } from '../firebase';
+import { db, storage } from '../firebase';
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import '../css/global.css';
 import '../css/AddRecipe.css';
 
@@ -28,7 +29,7 @@ class AddRecipe extends React.Component{
       ingredients: '',
       ingredientCount: '',
       name: '',
-      // img: null
+      img: null
     }
 
     setRecipeCookingTime = async (cookingTime) => {
@@ -62,16 +63,32 @@ class AddRecipe extends React.Component{
     setRecipeName = async (name) => {
       this.setState({name: name});
     }
-
-    // uploadImage = async (img) => {
-    //   this.setState({img: img});
-    // }
     
-    // chooseImage = e => {
-    //   if (e.target.files[0]){
+    setImage = (selectImage) => {
+      if (selectImage.target.files[0]){
+        this.setState({img: selectImage.target.files[0]});
+      }
+    }
 
-    //   }
-    // }
+    uploadImage = () => {
+      return new Promise((resolve, reject) => {
+        const newImage = this.state.img;
+        const imageRef = ref(storage, `/images/${newImage.name}`);
+        uploadBytesResumable(imageRef, newImage)
+          .then((snapshot) => {
+            console.log('Uploaded', snapshot.totalBytes, 'bytes.');
+            console.log('File metadata:', snapshot.metadata);
+            getDownloadURL(snapshot.ref).then((url) => {
+              console.log('File available at', url);
+              resolve(url);
+            });
+          }).catch((error) => {
+            console.error('Upload failed', error);
+            alert("Image upload failed");
+            reject("Upload failed");
+          });
+      })
+    }
 
     resetForm = () => {
       this.setState({cookingTime: ""});
@@ -82,6 +99,7 @@ class AddRecipe extends React.Component{
       this.setState({ingredients: ""});
       this.setState({ingredientCount: ""});
       this.setState({name: ""});
+      this.setState({img: null});
       let inputs = document.getElementsByClassName("recipe-input");
       for (let i = 0; i < inputs.length; i++) {
         let element = inputs[i]
@@ -90,6 +108,8 @@ class AddRecipe extends React.Component{
     }
 
     createRecipe = async () => {
+        const imageUrl = await this.uploadImage();
+        console.log("testing:", imageUrl)
         await addDoc(collection(db, "recipes"), {
           cookingTime: this.state.cookingTime,
           cuisine: this.state.cuisine,
@@ -99,6 +119,7 @@ class AddRecipe extends React.Component{
           ingredients: this.state.ingredients,
           ingredientCount: this.state.ingredientCount,
           name: this.state.name, 
+          img: imageUrl
         })
         .then(function(docRef) {
           console.log("Successfully created new recipe with ID", docRef.id)
@@ -108,7 +129,7 @@ class AddRecipe extends React.Component{
         .catch(function(error) {
           console.error("Error adding document: ", error);
         });
-      };
+    };
       
     render(){
         return (
@@ -132,8 +153,7 @@ class AddRecipe extends React.Component{
                         {input("Difficulty", "Very Difficult", this.setRecipeDifficulty)}
                         {input("Cuisine", "Hawaiian", this.setRecipeCuisine)}
                         {input("Diet", "Vegetarian", this.setRecipeDiet)}
-                        {/* <input type="file" onChange={this.chooseImage}/> */}
-                        {/* <button className="recipe-submit" onClick={this.uploadImage}>Upload</button> */}
+                        <input type="file" onChange={this.setImage}/>
                         <button className="recipe-submit" onClick={this.createRecipe}>Create Recipe</button>
                     </div>
                 </div>
