@@ -6,7 +6,7 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import '../css/global.css';
 import '../css/AddRecipe.css';
 
-const input = (recipeName, recipePlaceholder, recipeEvent) => {
+const recipeInput = (recipeName, recipePlaceholder, recipeEvent) => {
     return(
       <div className="recipe-input-wrapper">
         <label className="recipe-input-label">{recipeName}</label>
@@ -145,15 +145,24 @@ class AddRecipe extends React.Component{
                 </div>
                 <div className="middle-centered-container">
                     <div className="add-recipe-middle-wrapper">
-                        {input("Name", "Haulolo", this.setRecipeName)}
-                        {input("Ingredients", "Rice", this.setRecipeIngredients)}
-                        {input("Ingredient Count", "1", this.setRecipeIngredientCount)}
-                        {input("Directions", "Cook this", this.setRecipeDirections)}
-                        {input("Cooking Time", "15 minutes", this.setRecipeCookingTime)}
-                        {input("Difficulty", "Very Difficult", this.setRecipeDifficulty)}
-                        {input("Cuisine", "Hawaiian", this.setRecipeCuisine)}
-                        {input("Diet", "Vegetarian", this.setRecipeDiet)}
-                        <input type="file" onChange={this.setImage}/>
+                        {recipeInput("Name", "Haulolo", this.setRecipeName)}
+                        {recipeInput("Ingredients", "Rice", this.setRecipeIngredients)}
+                        {recipeInput("Ingredient Count", "1", this.setRecipeIngredientCount)}
+                        {recipeInput("Directions", "Cook this", this.setRecipeDirections)}
+                        {recipeInput("Cooking Time", "15 minutes", this.setRecipeCookingTime)}
+                        {recipeInput("Difficulty", "Very Difficult", this.setRecipeDifficulty)}
+                        {recipeInput("Cuisine", "Hawaiian", this.setRecipeCuisine)}
+                        {recipeInput("Diet", "Vegetarian", this.setRecipeDiet)}
+                        <div className="recipe-input-wrapper">
+                          <label className="recipe-input-label">Upload Image</label>
+                          <div className="recipe-input recipe-input-image-container">
+                            <label htmlFor="file-upload" className="recipe-image-upload">
+                              <p className="recipe-image-upload-text">Choose a file...</p>
+                            </label>
+                            <input id="file-upload" type="file" onChange={this.setImage}/>
+                          </div>
+                        </div>
+                        
                         <button className="recipe-submit" onClick={this.createRecipe}>Create Recipe</button>
                     </div>
                 </div>

@@ -13,16 +13,17 @@ class Recipe extends React.Component {
       ingredientCount: PropTypes.string,
       likes: PropTypes.string,
       name: PropTypes.string,
+      img: PropTypes.string
     }),
     deleteRecipe: PropTypes.func,
     id: PropTypes.string
   }; 
   render() {
-    const { cuisine, cookingTime, diet, difficulty, directions, ingredients, ingredientCount, likes, name} = this.props.details;
+    const { cuisine, cookingTime, diet, difficulty, directions, ingredients, ingredientCount, likes, name, img} = this.props.details;
     return (
       <div className="recipe-container-small">
         {/* <img src={image} alt={name} /> */}
-        <div className="recipe-image">Recipe Image</div>
+        <div className="recipe-image" style={{"background-image": "url(" + img + ")"}}></div>
         <div className="recipe-data-container">
           <h3 className="recipe-title">{name}</h3>
           <div className="recipe-split-columns">

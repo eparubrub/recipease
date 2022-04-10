@@ -1,8 +1,14 @@
 :root {
   --color-brand: #406343;
   --color-brand-light: #52734D;
+  --color-brand-30-transparent: #4063434d;
   --color-background: #ECEAD8;
   --color-white: whitesmoke;
+}
+
+input {
+  padding: 0;
+  border-width: 0;
 }
 
 * {
@@ -14,7 +20,7 @@ body {
   padding: 0px;
 }
 
-h1, h2, h3, h4{
+h1, h2, h3, h4, label{
   font-family: 'Nunito Sans', sans-serif;
   font-weight: bold;
   color: var(--color-brand);

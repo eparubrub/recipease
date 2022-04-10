@@ -35,7 +35,8 @@ const MockRecipe = () => {
     ingredientCount: Math.floor(Math.random() *  20),
     ingredients: ingredients[Math.floor(Math.random() * ingredients.length)],
     likes: Math.floor(Math.random() *  1000),
-    name: name[Math.floor(Math.random() * name.length)]
+    name: name[Math.floor(Math.random() * name.length)],
+    img: "/images/sample-food-image.png"
   }
 }
 

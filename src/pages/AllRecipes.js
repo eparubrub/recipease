@@ -76,8 +76,6 @@ class AllRecipes extends React.Component {
     }
   }
 
-
-
   render() {
     return (
       <div>
