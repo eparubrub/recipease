@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { collection, addDoc} from 'firebase/firestore';
 import { db, storage } from '../firebase';
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import BarLoader from "react-spinners/BarLoader";
+import { css } from "@emotion/react";
 import '../css/global.css';
 import '../css/AddRecipe.css';
 
@@ -17,10 +19,17 @@ const recipeInput = (recipeName, recipePlaceholder, recipeEvent) => {
         />
       </div>
     )
-  }
+}
+
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+`;
 
 class AddRecipe extends React.Component{
     state = {
+      loading: false,
       cookingTime: '',
       cuisine: '',
       diet: '',
@@ -30,6 +39,10 @@ class AddRecipe extends React.Component{
       ingredientCount: '',
       name: '',
       img: null
+    }
+
+    setLoading = async (loading) => {
+      this.setState({loading: loading});
     }
 
     setRecipeCookingTime = async (cookingTime) => {
@@ -108,8 +121,8 @@ class AddRecipe extends React.Component{
     }
 
     createRecipe = async () => {
+        this.setLoading(true);
         const imageUrl = await this.uploadImage();
-        console.log("testing:", imageUrl)
         await addDoc(collection(db, "recipes"), {
           cookingTime: this.state.cookingTime,
           cuisine: this.state.cuisine,
@@ -123,6 +136,7 @@ class AddRecipe extends React.Component{
         })
         .then(function(docRef) {
           console.log("Successfully created new recipe with ID", docRef.id)
+          this.setLoading(false);
           this.resetForm()
           return docRef.id;
         }.bind(this))
@@ -162,7 +176,9 @@ class AddRecipe extends React.Component{
                             <input id="file-upload" type="file" onChange={this.setImage}/>
                           </div>
                         </div>
-                        
+                        <div className="loading-bar-container">
+                          <BarLoader css={override} height="5" width="100%" color={"var(--color-brand)"} loading={this.state.loading} speedMultiplier={1} />
+                        </div>
                         <button className="recipe-submit" onClick={this.createRecipe}>Create Recipe</button>
                     </div>
                 </div>

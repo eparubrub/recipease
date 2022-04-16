@@ -30,7 +30,6 @@ input[type="file"] {
   border-width: 2px;
 }
 
-
 .recipe-image-upload{
   display: inline-block;
   width: 100%;
@@ -64,16 +63,20 @@ input[type="file"] {
   margin: 10px 0 10px 0;
 }
 
+.loading-bar-container{
+  width: 100%;
+}
+
 .recipe-submit{
-    color: var(--color-white);
-    border-style: solid;
-    border-color: var(--color-brand);
-    background-color: var(--color-brand);
-    width: 180px;
-    height: 40px;
-    border-radius: 10px;
-    margin: 10px;
-    font-size: .9em;
+  color: var(--color-white);
+  border-style: solid;
+  border-color: var(--color-brand);
+  background-color: var(--color-brand);
+  width: 180px;
+  height: 40px;
+  border-radius: 10px;
+  margin: 10px;
+  font-size: .9em;
 }
 
 /* Responsive
@@ -87,5 +90,9 @@ input[type="file"] {
  @media screen and (max-width: 800px) {
   .recipe-input-wrapper{
     width: 250px;
+  }
+  .recipe-image-upload-text{
+    padding-block-start: .88em;
+    padding-block-end: .88em;
   }
 }
