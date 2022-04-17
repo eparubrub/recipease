@@ -195,7 +195,7 @@ class AddRecipe extends React.Component{
                         )}
                         <div className="recipe-input-wrapper">
                           <label className="recipe-input-label">Upload Image</label>
-                          <div className="recipe-input recipe-input-image-container">
+                          <div className="recipe-input recipe-input-image-container recipe-upload-text">
                             <label htmlFor="file-upload" className="recipe-image-upload">
                               <p className="recipe-image-upload-text">Choose a file...</p>
                             </label>

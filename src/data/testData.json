@@ -1,0 +1,17 @@
+{
+  "directions": [
+    "Stir fry ingredients and serve on a plate", "Mix ingredients in a bowl and refrigerate", 
+    "Broil ingredients on a pan sheet and serve", "Par-boil ingredients and serve", "Deep fry ingredients"
+  ],
+  "ingredients": [
+    "Chicken, Soy Sauce, Sugar", "Coconut milk, gelatin", 
+    "White Rice, carrots, spam, onions, soy sauce, green oninon", 
+    "Garbanzo beans, garlic, sesame seeds, olive oil", "Rice, vanilla, sugar, heavy cream", 
+    "Banana, coconut milk, ice, sugar"
+  ],
+  "name": [
+    "Teriyaki Chicken", "Haupia", "Fried Rice", "Garlic potatoes", 
+    "Falafel", "Mochi Ice Cream", "Banana smoothie", "Beef Stir Fry",
+    "Malasada", "Shave Ice", "Chocolate cake", "Manapua"
+  ]
+}
