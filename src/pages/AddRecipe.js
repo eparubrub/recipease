@@ -21,6 +21,21 @@ const recipeInput = (recipeName, recipePlaceholder, recipeEvent) => {
     )
 }
 
+const recipeInputDropdown = (recipeName, recipeOptions, recipeEvent, currentVal) => {
+  return(
+    <div className="recipe-input-wrapper">
+      <label className="recipe-input-label">{recipeName}</label>
+      <select className="recipe-input" value={currentVal} onChange={(e) => recipeEvent(e.target.value)}>
+        <option value="">- Select {recipeName} -</option>
+        {recipeOptions.map((val) => (
+          React.createElement("option", {value: val, key: val}, val)
+        ))}
+        <div className="blah"></div>
+      </select>
+    </div>
+  )
+}
+
 const override = css`
   display: block;
   margin: 0 auto;
@@ -28,6 +43,7 @@ const override = css`
 `;
 
 class AddRecipe extends React.Component{
+    defaults = require("../data/recipeDefaults.json")
     state = {
       loading: false,
       cookingTime: '',
@@ -92,7 +108,7 @@ class AddRecipe extends React.Component{
             console.log('Uploaded', snapshot.totalBytes, 'bytes.');
             console.log('File metadata:', snapshot.metadata);
             getDownloadURL(snapshot.ref).then((url) => {
-              console.log('File available at', url);
+              // console.log('File available at', url);
               resolve(url);
             });
           }).catch((error) => {
@@ -161,12 +177,22 @@ class AddRecipe extends React.Component{
                     <div className="add-recipe-middle-wrapper">
                         {recipeInput("Name", "Haulolo", this.setRecipeName)}
                         {recipeInput("Ingredients", "Rice", this.setRecipeIngredients)}
-                        {recipeInput("Ingredient Count", "1", this.setRecipeIngredientCount)}
+                        {recipeInputDropdown(
+                          "Ingredient Count", this.defaults.ingredientCount, this.setRecipeIngredientCount, this.ingredientCount
+                        )}
                         {recipeInput("Directions", "Cook this", this.setRecipeDirections)}
-                        {recipeInput("Cooking Time", "15 minutes", this.setRecipeCookingTime)}
-                        {recipeInput("Difficulty", "Very Difficult", this.setRecipeDifficulty)}
-                        {recipeInput("Cuisine", "Hawaiian", this.setRecipeCuisine)}
-                        {recipeInput("Diet", "Vegetarian", this.setRecipeDiet)}
+                        {recipeInputDropdown(
+                          "Cooking Time", this.defaults.cookingTime, this.setRecipeCookingTime, this.cookingTime
+                        )}
+                        {recipeInputDropdown(
+                          "Difficulty", this.defaults.difficulty, this.setRecipeDifficulty, this.difficulty
+                        )}
+                        {recipeInputDropdown(
+                          "Cuisine", this.defaults.cuisine, this.setRecipeCuisine, this.cuisine
+                        )}
+                        {recipeInputDropdown(
+                          "Diet", this.defaults.diet, this.setRecipeDiet, this.Diet
+                        )}
                         <div className="recipe-input-wrapper">
                           <label className="recipe-input-label">Upload Image</label>
                           <div className="recipe-input recipe-input-image-container">
