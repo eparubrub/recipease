@@ -10,6 +10,18 @@ import '../css/global.css';
 import '../css/AddRecipe.css';
 
 const recipeInput = (recipeName, recipePlaceholder, recipeEvent) => {
+  if (recipeName === "Directions"){
+    return(
+      <div className="recipe-input-wrapper">
+        <label className="recipe-input-label">{recipeName}</label>
+        <textarea  
+          className="recipe-input directions" 
+          placeholder={recipePlaceholder} 
+          onChange={(event) => {recipeEvent(event.target.value)}}
+        />
+      </div>
+    )
+  } else {
     return(
       <div className="recipe-input-wrapper">
         <label className="recipe-input-label">{recipeName}</label>
@@ -20,13 +32,15 @@ const recipeInput = (recipeName, recipePlaceholder, recipeEvent) => {
         />
       </div>
     )
+  }
+
 }
 
 const recipeInputDropdown = (recipeName, recipeOptions, recipeEvent, currentVal) => {
   return(
     <div className="recipe-input-wrapper">
       <label className="recipe-input-label">{recipeName}</label>
-      <select className="recipe-input" value={currentVal} onChange={(e) => recipeEvent(e.target.value)}>
+      <select className="recipe-input dropdown" value={currentVal} onChange={(e) => recipeEvent(e.target.value)}>
         <option value="">- Select {recipeName} -</option>
         {recipeOptions.map((val) => (
           React.createElement("option", {value: val, key: val}, val)
@@ -111,6 +125,7 @@ class AddRecipe extends React.Component{
     setImage = (selectImage) => {
       if (selectImage.target.files[0]){
         this.setState({img: selectImage.target.files[0]});
+        document.getElementById("choose-file").innerHTML = `File chosen: ${selectImage.target.files[0].name}`;
       }
     }
 
@@ -152,6 +167,7 @@ class AddRecipe extends React.Component{
         let element = inputs[i]
         element.value = ""
       }
+      document.getElementById("choose-file").innerHTML = "Choose a file...";
     }
 
     createRecipe = async () => {
@@ -187,9 +203,9 @@ class AddRecipe extends React.Component{
                 <div className="navbar-container">
                     <div className="navbar-top">
                     <div className="navbar-center-text">Add Recipe</div>
-                        <Link to="/home">
-                            <img src={"/images/back-arrow.png"} className="navbar-back" alt="back icon"/>
-                        </Link>
+                      <Link to="/home">
+                        <img src={"/images/back-arrow.png"} className="navbar-back" alt="back icon"/>
+                      </Link>
                     </div>
                     <div className="navbar-bottom"/>
                 </div>
@@ -217,7 +233,7 @@ class AddRecipe extends React.Component{
                           <label className="recipe-input-label">Upload Image</label>
                           <div className="recipe-input recipe-input-image-container recipe-upload-text">
                             <label htmlFor="file-upload" className="recipe-image-upload">
-                              <p className="recipe-image-upload-text">Choose a file...</p>
+                              <p id="choose-file" className="recipe-image-upload-text">Choose a file...</p>
                             </label>
                             <input id="file-upload" type="file" onChange={this.setImage}/>
                           </div>
