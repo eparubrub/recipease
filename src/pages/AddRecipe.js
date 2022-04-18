@@ -2,7 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { collection, addDoc} from 'firebase/firestore';
 import { db, storage } from '../firebase';
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { ref, uploadString, getDownloadURL } from "firebase/storage";
+import Resizer from "react-image-file-resizer";
 import BarLoader from "react-spinners/BarLoader";
 import { css } from "@emotion/react";
 import '../css/global.css';
@@ -30,11 +31,25 @@ const recipeInputDropdown = (recipeName, recipeOptions, recipeEvent, currentVal)
         {recipeOptions.map((val) => (
           React.createElement("option", {value: val, key: val}, val)
         ))}
-        <div className="blah"></div>
       </select>
     </div>
   )
 }
+
+const resizeFile = (file, size) =>
+  new Promise((resolve) => {
+    Resizer.imageFileResizer(
+      file, // Is the file of the image which will resized.
+      size, // Is the maxWidth of the resized new image.
+      size, // Is the maxHeight of the resized new image.
+      "JPEG", // Is the compressFormat of the resized new image.
+      100, // Is the quality of the resized new image.
+      0, // Is the degree of clockwise rotation to apply to uploaded image.
+      (uri) => { // Is the callBack function of the resized new image URI.
+        resolve(uri);
+      }
+    );
+  });
 
 const override = css`
   display: block;
@@ -99,23 +114,26 @@ class AddRecipe extends React.Component{
       }
     }
 
-    uploadImage = () => {
+    uploadImage = (size) => {
       return new Promise((resolve, reject) => {
-        const newImage = this.state.img;
-        const imageRef = ref(storage, `/images/${newImage.name}`);
-        uploadBytesResumable(imageRef, newImage)
-          .then((snapshot) => {
-            console.log('Uploaded', snapshot.totalBytes, 'bytes.');
-            console.log('File metadata:', snapshot.metadata);
-            getDownloadURL(snapshot.ref).then((url) => {
-              // console.log('File available at', url);
-              resolve(url);
-            });
-          }).catch((error) => {
-            console.error('Upload failed', error);
-            alert("Image upload failed");
-            reject("Upload failed");
-          });
+        resizeFile(this.state.img, size)
+          .then((newImageUri) => {
+            const newImageName = `${this.state.img.name}_${size}x${size}.jpeg`
+            const newImageRef = ref(storage, `/images/${newImageName}`);
+            uploadString(newImageRef, newImageUri, "data_url")
+              .then((snapshot) => {
+                // console.log('Uploaded', snapshot.totalBytes, 'bytes.');
+                // console.log('File metadata:', snapshot.metadata);
+                getDownloadURL(snapshot.ref).then((url) => {
+                  // console.log('File available at', url);
+                  resolve(url);
+                });
+              }).catch((error) => {
+                console.error('Upload failed', error);
+                alert("Image upload failed");
+                reject("Upload failed");
+              });
+          })
       })
     }
 
@@ -138,7 +156,8 @@ class AddRecipe extends React.Component{
 
     createRecipe = async () => {
         this.setLoading(true);
-        const imageUrl = await this.uploadImage();
+        const imageUrl400 = await this.uploadImage(400);
+        const imageUrl680 = await this.uploadImage(680);
         await addDoc(collection(db, "recipes"), {
           cookingTime: this.state.cookingTime,
           cuisine: this.state.cuisine,
@@ -148,7 +167,8 @@ class AddRecipe extends React.Component{
           ingredients: this.state.ingredients,
           ingredientCount: this.state.ingredientCount,
           name: this.state.name, 
-          img: imageUrl
+          imgSmall: imageUrl400,
+          imgBig: imageUrl680
         })
         .then(function(docRef) {
           console.log("Successfully created new recipe with ID", docRef.id)
@@ -203,7 +223,7 @@ class AddRecipe extends React.Component{
                           </div>
                         </div>
                         <div className="loading-bar-container">
-                          <BarLoader css={override} height="5" width="100%" color={"var(--color-brand)"} loading={this.state.loading} speedMultiplier={1} />
+                          <BarLoader css={override} height="5px" width="100%" color={"var(--color-brand)"} loading={this.state.loading} speedMultiplier={1} />
                         </div>
                         <button className="recipe-submit" onClick={this.createRecipe}>Create Recipe</button>
                     </div>

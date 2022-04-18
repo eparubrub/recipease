@@ -13,7 +13,8 @@ const MockRecipe = () => {
     ingredients: testdata.ingredients[Math.floor(Math.random() * testdata.ingredients.length)],
     likes: Math.floor(Math.random() *  1000),
     name: testdata.name[Math.floor(Math.random() * testdata.name.length)],
-    img: "/images/sample-food-image.png"
+    imgSmall: "/images/sample-food-image.png",
+    imgBig: "/images/sample-food-image.png"
   }
 }
 
