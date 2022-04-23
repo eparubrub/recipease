@@ -1,5 +1,5 @@
 import React from "react";
-import { db } from '../firebase';
+import { db, storage } from '../firebase';
 import { Link } from "react-router-dom";
 import Recipe from "../components/Recipe";
 import { collection, getDocs, updateDoc, deleteDoc, doc} from 'firebase/firestore';
@@ -9,6 +9,7 @@ import '../css/AllRecipes.css';
 import { useNavigate } from "react-router";
 import { signOutWithGoogle } from "../firebase";
 import MockRecipe from "../functions/MockRecipe";
+import { ref, deleteObject } from "firebase/storage";
 
 
 const SignOutButton = () => {
@@ -51,7 +52,23 @@ class AllRecipes extends React.Component {
     this.setState({ recipes });
   };
 
-  deleteRecipe = async (id) => {
+  deleteRecipeImage = (imgPath) => {
+    return new Promise((resolve, reject) => {
+      const newImageRef = ref(storage, imgPath);
+      deleteObject(newImageRef).then(() => {
+        // console.log("Deleted image at " + imgPath + " successfully")
+        resolve();
+      }).catch((error) => {
+        console.error('Image delete failed', error);
+        alert("Image delete failed");
+        reject("Upload failed");
+      });
+    })
+  }
+
+  deleteRecipe = async (id, imgSmallPath, imgBigPath) => {
+    await this.deleteRecipeImage(imgSmallPath);
+    await this.deleteRecipeImage(imgBigPath);
     await deleteDoc(doc(db, "recipes", id));
     const recipes = { ...this.state.recipes};
     delete recipes[id];

@@ -85,7 +85,7 @@ class AddRecipe extends React.Component{
       difficulty: '',
       directions: '',
       ingredients: '',
-      ingredientCount: '',
+      ingredientCount: null,
       name: '',
       img: null
     }
@@ -142,8 +142,13 @@ class AddRecipe extends React.Component{
             uploadString(newImageRef, newImageUri, "data_url")
               .then((snapshot) => {
                 getDownloadURL(snapshot.ref).then((url) => {
+                  // console.log("snapshot:", snapshot.ref)
                   // console.log('File available at', url);
-                  resolve(url);
+                  const imageInfo = {
+                    "path": snapshot.ref.fullPath,
+                    "url": url
+                  }
+                  resolve(imageInfo);
                 });
               }).catch((error) => {
                 console.error('Upload failed', error);
@@ -174,8 +179,8 @@ class AddRecipe extends React.Component{
 
     createRecipe = async () => {
       this.setLoading(true);
-      const imageUrl400 = await this.uploadImage(400);
-      const imageUrl680 = await this.uploadImage(680);
+      const image400 = await this.uploadImage(400);
+      const image680 = await this.uploadImage(680);
       await addDoc(collection(db, "recipes"), {
         cookingTime: this.state.cookingTime,
         cuisine: this.state.cuisine,
@@ -183,10 +188,10 @@ class AddRecipe extends React.Component{
         difficulty: this.state.difficulty,
         directions: this.state.directions,
         ingredients: this.state.ingredients,
-        ingredientCount: this.state.ingredientCount,
+        ingredientCount: Number(this.state.ingredientCount),
         name: this.state.name, 
-        imgSmall: imageUrl400,
-        imgBig: imageUrl680
+        imgSmall: image400,
+        imgBig: image680
       })
       .then(function(docRef) {
         console.log("Successfully created new recipe with ID", docRef.id)

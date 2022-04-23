@@ -13,8 +13,8 @@ class Recipe extends React.Component {
       ingredientCount: PropTypes.string,
       likes: PropTypes.string,
       name: PropTypes.string,
-      imgSmall: PropTypes.string,
-      imgBig: PropTypes.string,
+      imgSmall: PropTypes.object,
+      imgBig: PropTypes.object,
     }),
     deleteRecipe: PropTypes.func,
     id: PropTypes.string
@@ -24,7 +24,7 @@ class Recipe extends React.Component {
     return (
       <div className="recipe-container-small">
         {/* <img src={image} alt={name} /> */}
-        <div className="recipe-image" style={{"backgroundImage": "url(" + imgSmall + ")"}}></div>
+        <div className="recipe-image" style={{"backgroundImage": "url(" + imgSmall.url + ")"}}></div>
         <div className="recipe-data-container">
           <h3 className="recipe-title">{name}</h3>
           <div className="recipe-split-columns">
@@ -51,7 +51,7 @@ class Recipe extends React.Component {
               </div>
             </div>
           </div>
-          <button className="recipeDelete" onClick={() => this.props.deleteRecipe(this.props.id)}>Delete Recipe</button>
+          <button className="recipeDelete" onClick={() => this.props.deleteRecipe(this.props.id, imgSmall.url, imgBig.url)}>Delete Recipe</button>
         </div>
       </div>
     );
