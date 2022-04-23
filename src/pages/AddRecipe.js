@@ -191,7 +191,8 @@ class AddRecipe extends React.Component{
         ingredientCount: Number(this.state.ingredientCount),
         name: this.state.name, 
         imgSmall: image400,
-        imgBig: image680
+        imgBig: image680,
+        likes: 0
       })
       .then(function(docRef) {
         console.log("Successfully created new recipe with ID", docRef.id)

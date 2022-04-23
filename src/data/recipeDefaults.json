@@ -1,7 +1,7 @@
 {
   "cookingTime": [
-    "5 minutes or less", "10 minutes", "15 minutes", "30 minutes", "45 minutes",
-    "1 hour", "1 hour, 30 minutes", "2 hours", "2 hours, 30 minutes", "3 hours",
+    "5 minutes", "10 minutes", "15 minutes", "30 minutes", "45 minutes",
+    "1 hour", "1.5 hour", "2 hours", "2.5 hours", "3 hours",
     "3 hours+"
   ],
   "cuisine": [

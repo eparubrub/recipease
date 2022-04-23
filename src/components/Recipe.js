@@ -1,6 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+const getDeleteButton = (deleteFunction, id, imgSmallUrl, imgBigUrl) => {
+  if (process.env.REACT_APP_DEV_OR_ENV === "dev") {
+    return(
+      <button className="recipeDelete" onClick={() => deleteFunction(id, imgSmallUrl, imgBigUrl)}>Delete Recipe</button>
+    )
+  }
+}
+
 class Recipe extends React.Component {
   static propTypes = {
     details: PropTypes.shape({
@@ -10,7 +18,7 @@ class Recipe extends React.Component {
       difficulty: PropTypes.string,
       directions: PropTypes.string,
       ingredients: PropTypes.string,
-      ingredientCount: PropTypes.string,
+      ingredientCount: PropTypes.number,
       likes: PropTypes.string,
       name: PropTypes.string,
       imgSmall: PropTypes.object,
@@ -51,7 +59,7 @@ class Recipe extends React.Component {
               </div>
             </div>
           </div>
-          <button className="recipeDelete" onClick={() => this.props.deleteRecipe(this.props.id, imgSmall.url, imgBig.url)}>Delete Recipe</button>
+          {getDeleteButton(this.props.deleteRecipe, this.props.id, imgSmall.url, imgBig.url)}
         </div>
       </div>
     );
