@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { collection, addDoc} from 'firebase/firestore';
 import { db, storage } from '../firebase';
 import { ref, uploadString, getDownloadURL } from "firebase/storage";
@@ -48,6 +48,10 @@ const recipeInputDropdown = (recipeName, recipeOptions, recipeEvent, currentVal)
       </select>
     </div>
   )
+}
+
+function withNavigation(Component) {
+  return props => <Component {...props} navigate={useNavigate()} />;
 }
 
 const resizeFile = (file, size) =>
@@ -137,8 +141,6 @@ class AddRecipe extends React.Component{
             const newImageRef = ref(storage, `/images/${newImageName}`);
             uploadString(newImageRef, newImageUri, "data_url")
               .then((snapshot) => {
-                // console.log('Uploaded', snapshot.totalBytes, 'bytes.');
-                // console.log('File metadata:', snapshot.metadata);
                 getDownloadURL(snapshot.ref).then((url) => {
                   // console.log('File available at', url);
                   resolve(url);
@@ -171,30 +173,30 @@ class AddRecipe extends React.Component{
     }
 
     createRecipe = async () => {
-        this.setLoading(true);
-        const imageUrl400 = await this.uploadImage(400);
-        const imageUrl680 = await this.uploadImage(680);
-        await addDoc(collection(db, "recipes"), {
-          cookingTime: this.state.cookingTime,
-          cuisine: this.state.cuisine,
-          diet: this.state.diet,
-          difficulty: this.state.difficulty,
-          directions: this.state.directions,
-          ingredients: this.state.ingredients,
-          ingredientCount: this.state.ingredientCount,
-          name: this.state.name, 
-          imgSmall: imageUrl400,
-          imgBig: imageUrl680
-        })
-        .then(function(docRef) {
-          console.log("Successfully created new recipe with ID", docRef.id)
-          this.setLoading(false);
-          this.resetForm()
-          return docRef.id;
-        }.bind(this))
-        .catch(function(error) {
-          console.error("Error adding document: ", error);
-        });
+      this.setLoading(true);
+      const imageUrl400 = await this.uploadImage(400);
+      const imageUrl680 = await this.uploadImage(680);
+      await addDoc(collection(db, "recipes"), {
+        cookingTime: this.state.cookingTime,
+        cuisine: this.state.cuisine,
+        diet: this.state.diet,
+        difficulty: this.state.difficulty,
+        directions: this.state.directions,
+        ingredients: this.state.ingredients,
+        ingredientCount: this.state.ingredientCount,
+        name: this.state.name, 
+        imgSmall: imageUrl400,
+        imgBig: imageUrl680
+      })
+      .then(function(docRef) {
+        console.log("Successfully created new recipe with ID", docRef.id)
+        this.setLoading(false);
+        this.resetForm()
+        this.props.navigate("/home")
+      }.bind(this))
+      .catch(function(error) {
+        console.error("Error adding document: ", error);
+      });
     };
       
     render(){
@@ -209,7 +211,7 @@ class AddRecipe extends React.Component{
                     </div>
                     <div className="navbar-bottom"/>
                 </div>
-                <div className="middle-centered-container">
+                <div className="middle-centered-container" style={{"paddingBottom": "50px"}}>
                     <div className="add-recipe-middle-wrapper">
                         {recipeInput("Name", "Haulolo", this.setRecipeName)}
                         {recipeInput("Ingredients", "Rice", this.setRecipeIngredients)}
@@ -250,4 +252,4 @@ class AddRecipe extends React.Component{
 }
 
 
-export default AddRecipe
+export default withNavigation(AddRecipe)
