@@ -1,7 +1,7 @@
 const MockRecipe = () => {
   const recipeId = Math.floor(Math.random() *  100000);
-  const defaults = require("../data/recipeDefaults.json")
-  const testdata = require("../data/testData.json")
+  const defaults = require("../lib/data/recipeDefaults.json")
+  const testdata = require("../lib/data/testData.json")
   return {
     cookingTime: defaults.cookingTime[Math.floor(Math.random() * defaults.cookingTime.length)],
     cuisine: defaults.cuisine[Math.floor(Math.random() * defaults.cuisine.length)],

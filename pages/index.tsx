@@ -1,21 +1,20 @@
 import React from "react";
-import { db, storage } from '../firebase';
-import { Link } from "react-router-dom";
+import { db, storage } from '../lib/firebase';
+import Link from "next/link";
 import Recipe from "../components/Recipe";
 import { collection, getDocs, updateDoc, deleteDoc, doc} from 'firebase/firestore';
-import '../css/global.css';
-import '../css/recipe.css';
-import '../css/AllRecipes.css';
-import { useNavigate } from "react-router";
-import { signOutWithGoogle } from "../firebase";
-import MockRecipe from "../functions/MockRecipe";
+// import '../styles/recipe.css';
+// import '../styles/AllRecipes.css';
+import { useRouter } from 'next/router'
+import { signOutWithGoogle } from "../lib/firebase";
+import MockRecipe from "../lib/MockRecipe";
 import { ref, deleteObject } from "firebase/storage";
 
 
 const SignOutButton = () => {
-  let navigate = useNavigate();
   function handleButton() {
-    signOutWithGoogle(navigate)
+    const router = useRouter()
+    signOutWithGoogle(router)
   }
   return (
     <button className="navbar-button middle-centered-container" onClick={handleButton}>Logout</button>
@@ -53,7 +52,7 @@ class AllRecipes extends React.Component {
   };
 
   deleteRecipeImage = (imgPath) => {
-    return new Promise((resolve, reject) => {
+    return new Promise<void>((resolve, reject) => {
       const newImageRef = ref(storage, imgPath);
       deleteObject(newImageRef).then(() => {
         // console.log("Deleted image at " + imgPath + " successfully")
@@ -101,7 +100,7 @@ class AllRecipes extends React.Component {
           <div className="navbar-center-text">All Recipes</div>
               <SignOutButton/>
               {getDevButtons(this.populateFromFirebase, this.addTestRecipe)}
-              <Link to="/addRecipe">
+              <Link href="/addRecipe">
                 <img 
                   className="navbar-add-recipe" 
                   src={"/images/add-recipe.png"} 

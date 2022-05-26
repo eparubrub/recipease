@@ -19,19 +19,19 @@ const provider = new GoogleAuthProvider();
 export const auth = getAuth(app);
 export const db = getFirestore();
 export const storage = getStorage(app);
-export const signInWithGoogle = (navigate) => {
+export const signInWithGoogle = (router) => {
   signInWithPopup(auth, provider)
     .then((result) => {
       sessionStorage.setItem('user', result.user.displayName)
-      navigate('/home')
+      router('/home')
     })
     .catch((error) => {
       console.log(error)
     })
 };
-export const signOutWithGoogle = (navigate) => {
+const signOutWithGoogle = (router) => {
   auth.signOut();
   sessionStorage.removeItem('user')
-  navigate('/login')
+  router('/login')
 };
 

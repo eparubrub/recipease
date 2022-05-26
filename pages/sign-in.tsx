@@ -1,14 +1,14 @@
 import React from "react";
-import { signInWithGoogle} from "../firebase.js"
-import { useNavigate } from "react-router-dom";
-import "../css/SignIn.css"
+import { signInWithGoogle} from "../lib/firebase.jsx"
+import { useRouter } from 'next/router'
+// import "../css/SignIn.css"
 
 const SignIn = () => {
-    let navigate = useNavigate();
+  const router = useRouter();
     function handleButton() {
-      let userPassword = document.getElementById("password").value;
+      let userPassword = (document.getElementById("password") as HTMLInputElement).value;
       if (userPassword === process.env.REACT_APP_PASSWORD){
-        signInWithGoogle(navigate)
+        signInWithGoogle;
       }
       else if (userPassword === ""){
         alert("Please enter a Password to enter the page")
