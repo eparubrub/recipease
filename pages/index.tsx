@@ -1,7 +1,7 @@
 import React from "react";
 import { db, storage } from "../lib/firebase";
 import Link from "next/link";
-import { Recipe, Recipe2 } from "../components/Recipe";
+import { Recipe } from "../components/Recipe";
 import {
   collection,
   getDocs,
@@ -124,15 +124,11 @@ class AllRecipes extends React.Component {
           <div className="middle-centered-container">
             <div className="all-recipes-middle-wrapper">
               {Object.keys(this.state.recipes).map((key) => (
-                <>
-                  {/* <Recipe
-                    key={key}
-                    id={key}
-                    details={this.state.recipes[key]}
-                    deleteRecipe={this.deleteRecipe}
-                  /> */}
-                  <Recipe2 id={key} details={this.state.recipes[key]} />
-                </>
+                <Recipe
+                  id={key}
+                  details={this.state.recipes[key]}
+                  deleteRecipe={this.deleteRecipe}
+                />
               ))}
             </div>
           </div>
