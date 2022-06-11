@@ -1,8 +1,8 @@
-h1{
+h1 {
   font-size: 2.5em;
-} 
+}
 
-.sign-in-wrapper{
+.sign-in-wrapper {
   width: 600px;
   height: 400px;
   font-size: 1.1em;
@@ -10,8 +10,8 @@ h1{
   flex-flow: column nowrap;
   /* border: 2px dashed red; */
   justify-content: center;
-  align-items: center; 
-  box-sizing: border-box; 
+  align-items: center;
+  box-sizing: border-box;
 }
 
 .sign-in-input {
@@ -35,7 +35,7 @@ button.middle-centered {
   height: 40px;
   border-radius: 10px;
   margin: 10px;
-  font-size: .9em;
+  font-size: 0.9em;
 }
 
 button.middle-centered:hover {
@@ -43,20 +43,18 @@ button.middle-centered:hover {
   background-color: var(--color-brand-light);
 }
 
-
 /* Responsive
  ----------------------------- */
- @media screen and (max-width: 1150px) {
-
+@media screen and (max-width: 1150px) {
 }
- @media screen and (max-width: 800px) {
-  h1{
+@media screen and (max-width: 800px) {
+  h1 {
     font-size: 1.7em;
-  } 
-  p{
-     font-size: .8em;
-   }
-  .sign-in-wrapper{
+  }
+  p {
+    font-size: 0.8em;
+  }
+  .sign-in-wrapper {
     width: 400px;
     height: 300px;
   }
@@ -65,14 +63,14 @@ button.middle-centered:hover {
     height: 30px;
     border-radius: 7.5px;
     margin: 7.5px;
-    font-size: .9em;
+    font-size: 0.9em;
   }
-  
+
   button.middle-centered {
     width: 140px;
     height: 30px;
     border-radius: 7.5px;
     margin: 7.5px;
-    font-size: .7em;
+    font-size: 0.7em;
   }
 }

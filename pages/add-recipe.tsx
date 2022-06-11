@@ -1,7 +1,7 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+// import { Link, useNavigate } from "react-router-dom";
 import { collection, addDoc} from 'firebase/firestore';
-import { db, storage } from '../firebase';
+import { db, storage } from '../lib/firebase';
 import { ref, uploadString, getDownloadURL } from "firebase/storage";
 import Resizer from "react-image-file-resizer";
 import BarLoader from "react-spinners/BarLoader";
