@@ -11,21 +11,11 @@ import {
 } from "firebase/firestore";
 // import '../styles/recipe.css';
 // import '../styles/AllRecipes.css';
-import { useRouter } from "next/router";
-// import { signOutWithGoogle } from "../lib/firebase";
+import Router from "next/router";
+import { signOutWithGoogle } from "../lib/firebase";
 import { Navbar } from "../components/Navbar";
 import MockRecipe from "../lib/MockRecipe";
 import { ref, deleteObject } from "firebase/storage";
-
-// const SignOutButton = () => {
-//   function handleButton() {
-//     const router = useRouter()
-//     signOutWithGoogle(router)
-//   }
-//   return (
-//     <button className="navbar-button middle-centered-container" onClick={handleButton}>Logout</button>
-//   );
-// }
 
 class AllRecipes extends React.Component {
   state = {
@@ -80,6 +70,10 @@ class AllRecipes extends React.Component {
     if (process.env.REACT_APP_DEV_OR_ENV !== "dev") {
       this.populateFromFirebase();
     }
+    const user = sessionStorage.getItem("user");
+    // if (!user) {
+    //   Router.push("/sign-in");
+    // }
   };
 
   render() {

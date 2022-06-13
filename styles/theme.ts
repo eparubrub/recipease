@@ -33,8 +33,9 @@ const theme = {
     lg: "1.25rem",
   },
   fontFamily: {
-    base: `"Helvetica Now Display", "Helvetica Neue", "Helvetica"`,
-    hackathon: "Permanent Marker",
+    base: "Nunito",
+    alt: `'Nunito', sans-serif`,
+    alt2: `'Nunito Sans', sans-serif`,
   },
   layout: {
     width: {

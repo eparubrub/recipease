@@ -1,15 +1,14 @@
 // import React from "react"
 // import {Outlet, Navigate } from "react-router-dom"
 
-// const useAuth = () => {
-//   const user=sessionStorage.getItem('user')
-//   if (user){
-//     return true;
-//   }
-//   else{
-//     return false;
-//   }
-// }
+export const useAuth = () => {
+  const user = sessionStorage.getItem("user");
+  if (user) {
+    return true;
+  } else {
+    return false;
+  }
+};
 
 // const PrivateRoute = () => {
 //   const currentUser = useAuth();

@@ -1,86 +1,8 @@
 import React from "react";
 import theme from "../styles/theme";
 import Link from "next/link";
-
-const getDevButtons = (populateFromFirebase, addTestRecipe) => {
-  if (process.env.REACT_APP_DEV_OR_ENV === "dev") {
-    return (
-      <>
-        <div>
-          <button
-            className="middle-centered-container firebase-button"
-            onClick={populateFromFirebase}
-          >
-            Firebase
-          </button>
-          <button
-            className="middle-centered-container testdata-button"
-            onClick={addTestRecipe}
-          >
-            Testdata
-          </button>
-        </div>
-        <style jsx>{`
-          button {
-            border-radius: 20px;
-            border-style: solid;
-            border-color: ${theme.color.brand.base};
-            background-color: ${theme.color.brand.base};
-            min-height: 40px;
-            height: 40%;
-            max-width: 100px;
-            width: 30%;
-            top: 0;
-            bottom: 0;
-            left: 20px;
-            margin: auto;
-            position: absolute;
-            text-align: center;
-            font-weight: 400;
-            font-size: 1.2em;
-            color: ${theme.color.background.white};
-            display: flex;
-            font-family: "Nunito";
-            flex-direction: column;
-            justify-content: center;
-          }
-          .navbar-back {
-            height: 40%;
-            top: 0;
-            bottom: 0;
-            margin: auto;
-            left: 20px;
-            position: absolute;
-          }
-          button:hover {
-            border-color: ${theme.color.brand.alt};
-            background-color: ${theme.color.brand.alt};
-            cursor: pointer;
-          }
-          @media screen and (max-width: ${theme.layout.breakPoints.small}) {
-            button {
-              height: 15px;
-              width: 70px;
-              left: 10px;
-              font-weight: 400;
-              font-size: 0.9em;
-            }
-            .navbar-back {
-              height: 30%;
-              left: 10px;
-            }
-          }
-          .firebase-button {
-            left: 125px;
-          }
-          .testdata-button {
-            left: 230px;
-          }
-        `}</style>
-      </>
-    );
-  }
-};
+import { Button } from "./Button";
+import { signOutWithGoogle } from "../lib/firebase";
 
 interface NavbarProps {
   populateFromFirebase;
@@ -93,8 +15,13 @@ export function Navbar({ populateFromFirebase, addTestRecipe }: NavbarProps) {
       <div className="navbar-container">
         <div className="navbar-top">
           <div className="navbar-center-text">All Recipes</div>
-          {/* <SignOutButton/> */}
-          {getDevButtons(populateFromFirebase, addTestRecipe)}
+          <Button onClickFunction={signOutWithGoogle}>Sign Out</Button>
+          <Button onClickFunction={addTestRecipe} customLeft="8rem">
+            Test Data
+          </Button>
+          <Button onClickFunction={populateFromFirebase} customLeft="15rem">
+            Firebase
+          </Button>
           <Link href="/addRecipe">
             <img
               className="navbar-add-recipe"
