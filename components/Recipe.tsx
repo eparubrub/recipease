@@ -1,6 +1,5 @@
 import React from "react";
 import theme from "../styles/theme";
-import PropTypes from "prop-types";
 
 const getDeleteButton = (
   deleteFunction: Function,
@@ -25,7 +24,7 @@ const getDeleteButton = (
   }
 };
 
-interface Recipe2Props {
+interface RecipeProps {
   details: {
     cuisine: string;
     cookingTime: string;
@@ -43,7 +42,7 @@ interface Recipe2Props {
   id: string;
 }
 
-export function Recipe({ details, id, deleteRecipe }: Recipe2Props) {
+export function Recipe({ details, id, deleteRecipe }: RecipeProps) {
   return (
     <>
       <div className="recipe-container-small">
@@ -110,7 +109,7 @@ export function Recipe({ details, id, deleteRecipe }: Recipe2Props) {
           min-height: 200px;
           min-width: 550px;
           border-radius: 20px;
-          border: 3.5px solid var(--color-brand);
+          border: 3.5px solid ${theme.color.brand.base};
           margin: 10px;
           display: flex;
           /* justify-content: center; */
@@ -125,7 +124,7 @@ export function Recipe({ details, id, deleteRecipe }: Recipe2Props) {
           top: 0px;
           padding: 10px;
           border-radius: 16px 0px 0px 16px; /* top left, top right, bottom right, bottom left */
-          border-right: 5px solid var(--color-brand);
+          border-right: 5px solid ${theme.color.brand.base};
           background-repeat: no-repeat;
           background-position: center center;
           background-size: cover;
@@ -147,7 +146,7 @@ export function Recipe({ details, id, deleteRecipe }: Recipe2Props) {
         }
         @media screen and (max-width: 1150px) {
         }
-        @media screen and (max-width: 800px) {
+        @media screen and (max-width: ${theme.layout.breakPoints.small}) {
           h3 {
             font-size: 0.8em;
             margin-top: 3.5px;
@@ -173,7 +172,7 @@ export function Recipe({ details, id, deleteRecipe }: Recipe2Props) {
             width: 90px;
             padding: 5px;
             border-radius: 15px 0px 0px 15px;
-            border-right: 2.5px solid var(--color-brand);
+            border-right: 2.5px solid ${theme.color.brand.base};
           }
           .recipe-data-container {
             width: 162.5px;

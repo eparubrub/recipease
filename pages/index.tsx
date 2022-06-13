@@ -13,6 +13,7 @@ import {
 // import '../styles/AllRecipes.css';
 import { useRouter } from "next/router";
 // import { signOutWithGoogle } from "../lib/firebase";
+import { Navbar } from "../components/Navbar";
 import MockRecipe from "../lib/MockRecipe";
 import { ref, deleteObject } from "firebase/storage";
 
@@ -25,27 +26,6 @@ import { ref, deleteObject } from "firebase/storage";
 //     <button className="navbar-button middle-centered-container" onClick={handleButton}>Logout</button>
 //   );
 // }
-
-const getDevButtons = (populateFromFirebase, addTestRecipe) => {
-  if (process.env.REACT_APP_DEV_OR_ENV === "dev") {
-    return (
-      <div>
-        <button
-          className="navbar-button middle-centered-container firebase-button"
-          onClick={populateFromFirebase}
-        >
-          Firebase
-        </button>
-        <button
-          className="navbar-button middle-centered-container testdata-button"
-          onClick={addTestRecipe}
-        >
-          Testdata
-        </button>
-      </div>
-    );
-  }
-};
 
 class AllRecipes extends React.Component {
   state = {
@@ -106,21 +86,10 @@ class AllRecipes extends React.Component {
     return (
       <>
         <div>
-          <div className="navbar-container">
-            <div className="navbar-top">
-              <div className="navbar-center-text">All Recipes</div>
-              {/* <SignOutButton/> */}
-              {getDevButtons(this.populateFromFirebase, this.addTestRecipe)}
-              <Link href="/addRecipe">
-                <img
-                  className="navbar-add-recipe"
-                  src={"/images/add-recipe.png"}
-                  alt="add recipe icon"
-                />
-              </Link>
-            </div>
-            <div className="navbar-bottom" />
-          </div>
+          <Navbar
+            populateFromFirebase={this.populateFromFirebase}
+            addTestRecipe={this.addTestRecipe}
+          />
           <div className="middle-centered-container">
             <div className="all-recipes-middle-wrapper">
               {Object.keys(this.state.recipes).map((key) => (
