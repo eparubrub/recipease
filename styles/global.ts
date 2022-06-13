@@ -10,8 +10,6 @@ export default css.global`
     --color-white: ${theme.color.background.white};
   }
 
-  @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200;400;600;800&family=Roboto&display=swap");
-
   input {
     padding: 0;
     border-width: 0;
