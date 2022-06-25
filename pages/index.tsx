@@ -1,5 +1,5 @@
 import React from "react";
-import { db, storage } from "../lib/firebase";
+import { auth, db, storage } from "../lib/firebase";
 import Link from "next/link";
 import { Recipe } from "../components/Recipe";
 import {
@@ -16,6 +16,7 @@ import { signOutWithGoogle } from "../lib/firebase";
 import { Navbar } from "../components/Navbar";
 import MockRecipe from "../lib/MockRecipe";
 import { ref, deleteObject } from "firebase/storage";
+import { checkAuth } from "../lib/handleAuth";
 
 class AllRecipes extends React.Component {
   state = {
@@ -67,13 +68,13 @@ class AllRecipes extends React.Component {
   };
 
   componentDidMount = async () => {
+    if (!sessionStorage.getItem("user") && auth) {
+      Router.push("/sign-in");
+    }
     if (process.env.REACT_APP_DEV_OR_ENV !== "dev") {
       this.populateFromFirebase();
     }
     const user = sessionStorage.getItem("user");
-    // if (!user) {
-    //   Router.push("/sign-in");
-    // }
   };
 
   render() {

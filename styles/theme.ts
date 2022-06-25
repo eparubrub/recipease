@@ -42,8 +42,8 @@ const theme = {
       interior: "46rem",
     },
     breakPoints: {
-      small: "800px",
-      medium: "60rem",
+      small: "50rem",
+      medium: "70rem",
     },
     zIndex: {
       below: "100",
