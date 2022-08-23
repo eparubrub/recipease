@@ -22,7 +22,7 @@ export function Navbar({ populateFromFirebase, addTestRecipe }: NavbarProps) {
           <Button onClickFunction={populateFromFirebase} customLeft="15rem">
             Firebase
           </Button>
-          <Link href="/addRecipe">
+          <Link href="/add-recipe">
             <img
               className="navbar-add-recipe"
               src={"/images/add-recipe.png"}
