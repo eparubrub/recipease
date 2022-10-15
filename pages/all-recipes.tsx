@@ -1,7 +1,7 @@
 import React from "react";
 import { db, storage } from "../lib/firebase";
 import Link from "next/link";
-import Recipe from "../components/Recipe";
+import { Recipe } from "../components/Recipe";
 import {
   collection,
   getDocs,
