@@ -9,31 +9,10 @@ import { css } from "@emotion/react";
 import Link from "next/link";
 import RecipeInputText from "../lib/RecipeInput/RecipeInputText";
 import RecipeInputDropdown from "../lib/RecipeInput/RecipeInputDropdown";
+import RecipeInputImage from "../lib/RecipeInput/RecipeInputImage";
+import RecipeInputSubmit from "../lib/RecipeInput/RecipInputSubmit";
 // import "../css/global.css";
 // import "../css/AddRecipe.css";
-
-const recipeInputDropdown = (
-  recipeName,
-  recipeOptions,
-  recipeEvent,
-  currentVal
-) => {
-  return (
-    <div className="recipe-input-wrapper">
-      <label className="recipe-input-label">{recipeName}</label>
-      <select
-        className="recipe-input dropdown"
-        value={currentVal}
-        onChange={(e) => recipeEvent(e.target.value)}
-      >
-        <option value="">- Select {recipeName} -</option>
-        {recipeOptions.map((val) =>
-          React.createElement("option", { value: val, key: val }, val)
-        )}
-      </select>
-    </div>
-  );
-};
 
 const resizeFile = (file, size) =>
   new Promise((resolve) => {
@@ -50,12 +29,6 @@ const resizeFile = (file, size) =>
       }
     );
   });
-
-const override = css`
-  display: block;
-  margin: 0 auto;
-  border-color: red;
-`;
 
 export default function AddRecipe() {
   const defaults = require("../lib/data/recipeDefaults.json");
@@ -218,30 +191,8 @@ export default function AddRecipe() {
             recipeEvent={setDiet}
             currentVal={diet}
           />
-          <div className="recipe-input-wrapper">
-            <label className="recipe-input-label">Upload Image</label>
-            <div className="recipe-input recipe-input-image-container recipe-upload-text">
-              <label htmlFor="file-upload" className="recipe-image-upload">
-                <p id="choose-file" className="recipe-image-upload-text">
-                  Choose a file...
-                </p>
-              </label>
-              <input id="file-upload" type="file" onChange={setImage} />
-            </div>
-          </div>
-          <div className="loading-bar-container">
-            <BarLoader
-              css={override}
-              height="5px"
-              width="100%"
-              color={"var(--color-brand)"}
-              loading={loading}
-              speedMultiplier={1}
-            />
-          </div>
-          <button className="recipe-submit" onClick={() => createRecipe}>
-            Create Recipe
-          </button>
+          <RecipeInputImage chooseFileId="choose-file" setImage={setImage} />
+          <RecipeInputSubmit loading={loading} submitRecipe={createRecipe} />
         </div>
       </div>
       <style jsx>{`

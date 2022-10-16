@@ -16,7 +16,6 @@ export default function RecipeInputText({
         <label>{recipeName}</label>
         {directionsText ? (
           <textarea
-            className="recipe-input directions"
             placeholder={recipePlaceholder}
             onChange={(event) => {
               recipeEvent(event.target.value);
@@ -52,7 +51,7 @@ export default function RecipeInputText({
           border-radius: 0.5rem;
           margin-top: 0.5rem;
           font-size: 1rem;
-          border-width: 0.1rem;
+          border-width: 0.13rem;
           text-indent: 0.2rem;
         }
         textarea {

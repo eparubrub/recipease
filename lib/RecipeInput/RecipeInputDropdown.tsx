@@ -47,7 +47,7 @@ export default function RecipeInputDropdown({
           border-radius: 0.5rem;
           margin-top: 0.5rem;
           font-size: 1rem;
-          border-width: 0.1rem;
+          border-width: 0.13rem;
           text-indent: 0.2rem;
           appearance: none;
           text-indent: 5px;
