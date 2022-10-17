@@ -11,6 +11,8 @@ import RecipeInputText from "../components/RecipeInput/RecipeInputText";
 import RecipeInputDropdown from "../components/RecipeInput/RecipeInputDropdown";
 import RecipeInputImage from "../components/RecipeInput/RecipeInputImage";
 import RecipeInputSubmit from "../components/RecipeInput/RecipeInputSubmit";
+import { Navbar } from "../components/Navbar";
+import theme from "../styles/theme";
 // import "../css/global.css";
 // import "../css/AddRecipe.css";
 
@@ -128,19 +130,15 @@ export default function AddRecipe() {
 
   return (
     <div>
-      <div className="navbar-container">
-        <div className="navbar-top">
-          <div className="navbar-center-text">Add Recipe</div>
-          <Link href="/">
-            <img
-              src={"/images/back-arrow.png"}
-              className="navbar-back"
-              alt="back icon"
-            />
-          </Link>
-        </div>
-        <div className="navbar-bottom" />
-      </div>
+      <Navbar pageName="Add Recipe">
+        <Link href="/">
+          <img
+            src={"/images/back-arrow.png"}
+            className="navbar-back"
+            alt="back icon"
+          />
+        </Link>
+      </Navbar>
       <div
         className="middle-centered-container"
         style={{ paddingBottom: "50px" }}
@@ -196,6 +194,15 @@ export default function AddRecipe() {
         </div>
       </div>
       <style jsx>{`
+        img {
+          height: 40%;
+          top: 0;
+          bottom: 0;
+          margin: auto;
+          left: 1.25rem;
+          position: absolute;
+          cursor: pointer;
+        }
         .add-recipe-middle-wrapper {
           display: flex;
           height: auto;
@@ -206,22 +213,30 @@ export default function AddRecipe() {
           /* border: 2px dashed red; */
         }
         .recipe-upload-text {
-          text-indent: 0px;
+          text-indent: 0;
         }
 
-        @media screen and (max-width: 1150px) {
+        @media screen and (max-width: ${theme.layout.breakPoints.medium}) {
+          img {
+            height: 30%;
+            left: 0.625rem;
+          }
           .recipe-input-wrapper {
-            width: 400px;
+            width: 25rem;
           }
         }
 
-        @media screen and (max-width: 800px) {
+        @media screen and (max-width: ${theme.layout.breakPoints.small}) {
+          img {
+            height: 30%;
+            left: 0.625rem;
+          }
           .recipe-input-wrapper {
-            width: 250px;
+            width: 15.625rem;
           }
           .recipe-image-upload-text {
-            padding-block-start: 0.88em;
-            padding-block-end: 0.88em;
+            padding-block-start: 0.88rem;
+            padding-block-end: 0.88rem;
           }
         }
       `}</style>

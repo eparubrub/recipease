@@ -86,45 +86,45 @@ export function Recipe({ details, id, deleteRecipe }: RecipeProps) {
       </div>
       <style jsx>{`
         h3 {
-          margin-top: 7px;
-          margin-bottom: 0px;
+          margin-top: 0.5rem;
+          margin-bottom: 0;
         }
 
         img {
-          width: 25px;
-          height: 25px;
+          width: 1.5rem;
+          height: 1.5rem;
           position: relative;
-          top: 5px;
+          top: 0.5rem;
         }
 
         p {
-          font-size: 1em;
+          font-size: 1rem;
           position: relative;
-          left: 10px;
+          left: 0.5rem;
           display: inline-block;
         }
         .recipe-container-small {
-          height: 200px;
-          width: 550px;
-          min-height: 200px;
-          min-width: 550px;
-          border-radius: 20px;
-          border: 3.5px solid ${theme.color.brand.base};
-          margin: 10px;
+          height: 12.5rem;
+          width: 34.5rem;
+          min-height: 12.5rem;
+          min-width: 34.5rem;
+          border-radius: 1.25rem;
+          border: 0.2rem solid ${theme.color.brand.base};
+          margin: 0.5rem;
           display: flex;
           /* justify-content: center; */
           flex-direction: column;
           position: relative;
         }
         .recipe-image {
-          height: 180px;
-          width: 180px;
+          height: 11.5rem;
+          width: 11.5rem;
           position: absolute;
-          left: 0px;
-          top: 0px;
-          padding: 10px;
-          border-radius: 16px 0px 0px 16px; /* top left, top right, bottom right, bottom left */
-          border-right: 5px solid ${theme.color.brand.base};
+          left: 0;
+          top: 0;
+          padding: 0.5rem;
+          border-radius: 1rem 0 0 1rem; /* top left, top right, bottom right, bottom left */
+          border-right: 0.3rem solid ${theme.color.brand.base};
           background-repeat: no-repeat;
           background-position: center center;
           background-size: cover;
@@ -133,55 +133,52 @@ export function Recipe({ details, id, deleteRecipe }: RecipeProps) {
           /* display: flex;
           flex-direction:column; */
           position: absolute;
-          width: 325px;
+          width: 20rem;
           height: 100%;
-          right: 10px;
+          right: 0.5rem;
+          border-radius: 0 1rem 1rem 0;
         }
         .recipe-split-columns {
           display: flex;
         }
         .recipe-column {
           flex: 50%;
-          margin-left: 10px;
-        }
-        @media screen and (max-width: 1150px) {
+          margin-left: 0.5rem;
         }
         @media screen and (max-width: ${theme.layout.breakPoints.small}) {
           h3 {
-            font-size: 0.8em;
-            margin-top: 3.5px;
-            margin-bottom: 0px;
+            font-size: 0.8rem;
+            margin-top: 0.25rem;
+            margin-bottom: 0;
           }
           img {
-            width: 12.5px;
-            height: 12.5px;
-            top: 2.5px;
+            width: 0.75rem;
+            height: 0.75rem;
+            top: 0.25rem;
           }
           p {
-            font-size: 0.5em;
-            left: 5px;
+            font-size: 0.5rem;
+            left: 0.25rem;
           }
           .recipe-container-small {
-            height: 100px;
-            width: 275px;
-            min-height: 100px;
-            min-width: 275px;
+            height: 6.25rem;
+            width: 17.25rem;
+            min-height: 6.25rem;
+            min-width: 17.25rem;
           }
           .recipe-image {
-            height: 90px;
-            width: 90px;
-            padding: 5px;
-            border-radius: 15px 0px 0px 15px;
-            border-right: 2.5px solid ${theme.color.brand.base};
+            height: 5.75rem;
+            width: 5.75rem;
+            padding: 0.25rem;
+            border-right: 0.15rem solid ${theme.color.brand.base};
           }
           .recipe-data-container {
-            width: 162.5px;
+            width: 10rem;
             height: 100%;
-            right: 5px;
-            border-radius: 0px 15px 15px 0px;
+            right: 0.25rem;
           }
           .recipe-column {
-            margin-left: 5px;
+            margin-left: 0.25rem;
           }
         }
       `}</style>
