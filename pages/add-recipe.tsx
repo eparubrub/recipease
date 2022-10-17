@@ -1,11 +1,8 @@
 import React, { useState } from "react";
-// import { Link, useNavigate } from "react-router-dom";
 import { collection, addDoc } from "firebase/firestore";
 import { db, storage } from "../lib/firebase";
 import { ref, uploadString, getDownloadURL } from "firebase/storage";
 import Resizer from "react-image-file-resizer";
-import BarLoader from "react-spinners/BarLoader";
-import { css } from "@emotion/react";
 import Link from "next/link";
 import RecipeInputText from "../components/RecipeInput/RecipeInputText";
 import RecipeInputDropdown from "../components/RecipeInput/RecipeInputDropdown";
@@ -13,8 +10,7 @@ import RecipeInputImage from "../components/RecipeInput/RecipeInputImage";
 import RecipeInputSubmit from "../components/RecipeInput/RecipeInputSubmit";
 import { Navbar } from "../components/Navbar";
 import theme from "../styles/theme";
-// import "../css/global.css";
-// import "../css/AddRecipe.css";
+import Router from "next/router";
 
 const resizeFile = (file, size) =>
   new Promise((resolve) => {
@@ -45,12 +41,12 @@ export default function AddRecipe() {
   const [name, setName] = useState<string>();
   const [img, setImg] = useState(null);
 
-  const setImage = (selectImage) => {
-    if (selectImage.target.files[0]) {
-      setImg(selectImage.target.files[0]);
+  const setImage = (event: any) => {
+    if (event && event.target.files[0]) {
+      setImg(event.target.files[0]);
       document.getElementById(
         "choose-file"
-      ).innerHTML = `File chosen: ${selectImage.target.files[0].name}`;
+      ).innerHTML = `File chosen: ${event.target.files[0].name}`;
     }
   };
 
@@ -59,7 +55,7 @@ export default function AddRecipe() {
       resizeFile(img, size).then((newImageUri) => {
         const newImageName = `${img.name}_${size}x${size}.jpeg`;
         const newImageRef = ref(storage, `/images/${newImageName}`);
-        uploadString(newImageRef, newImageUri, "data_url")
+        uploadString(newImageRef, newImageUri as string, "data_url")
           .then((snapshot) => {
             getDownloadURL(snapshot.ref).then((url) => {
               // console.log("snapshot:", snapshot.ref)
@@ -92,13 +88,14 @@ export default function AddRecipe() {
     setImage(null);
     let inputs = document.getElementsByClassName("recipe-input");
     for (let i = 0; i < inputs.length; i++) {
-      let element = inputs[i];
+      let element = inputs[i] as HTMLInputElement;
       element.value = "";
     }
     document.getElementById("choose-file").innerHTML = "Choose a file...";
   };
 
   const createRecipe = async () => {
+    console.log("testing from create recipe");
     setLoading(true);
     const image400 = await uploadImage(400);
     const image680 = await uploadImage(680);
@@ -120,7 +117,7 @@ export default function AddRecipe() {
           console.log("Successfully created new recipe with ID", docRef.id);
           setLoading(false);
           resetForm();
-          this.props.navigate("/home");
+          Router.push("/");
         }.bind(this)
       )
       .catch(function (error) {

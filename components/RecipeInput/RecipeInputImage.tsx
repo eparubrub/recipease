@@ -13,9 +13,9 @@ export default function RecipeInputImage({
   return (
     <>
       <div>
-        <label>Upload Image</label>
+        <label className="label-title">Upload Image</label>
         <div className="recipe-img-input">
-          <label htmlFor="file-upload">
+          <label htmlFor="file-upload" className="choose-file-label">
             <p id={chooseFileId}>Choose a file...</p>
           </label>
           <input id="file-upload" type="file" onChange={setImage} />
@@ -26,25 +26,19 @@ export default function RecipeInputImage({
           width: 35rem;
           margin: 0.6rem 0 0.6rem 0;
         }
-        label {
-          font-family: "Nunito";
-          font-weight: 600;
-          color: ${theme.color.brand.base};
-          font-size: 1.3rem;
-          display: inline-block;
-          width: 100%;
-          height: 1.9rem;
-          border-radius: 0.8rem;
-        }
         p {
-          height: 1.9rem;
-          font-size: 0.8rem;
+          height: 1.87rem;
+          font-size: 1rem;
           border-radius: 0.47rem;
           margin: 0;
-          padding-block-start: 0.46rem;
-          padding-block-end: 0.46rem;
+          padding-block-start: 0.47rem;
+          padding-block-end: 0.47rem;
           text-align: center;
           cursor: pointer;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          width: 100%;
+          white-space: nowrap;
         }
         p:hover {
           background-color: ${theme.color.brand.faded};
@@ -52,6 +46,19 @@ export default function RecipeInputImage({
         }
         input[type="file"] {
           display: none;
+        }
+        .label-title {
+          font-family: "Nunito";
+          font-weight: 600;
+          color: ${theme.color.brand.base};
+          font-size: 1.3rem;
+        }
+        .choose-file-label {
+          min-height: 100%;
+          display: inline-block;
+          width: 100%;
+          height: 1.9rem;
+          border-radius: 0.8rem;
         }
         .recipe-img-input {
           color: ${theme.color.brand.base};
@@ -69,12 +76,16 @@ export default function RecipeInputImage({
           div {
             width: 25rem;
           }
+          p {
+            height: 1.87rem;
+          }
         }
         @media screen and (max-width: ${theme.layout.breakPoints.small}) {
           div {
             width: 15rem;
           }
           p {
+            height: 1.05rem;
             padding-block-start: 0.88rem;
             padding-block-end: 0.88rem;
           }

@@ -1,12 +1,5 @@
 import BarLoader from "react-spinners/BarLoader";
-import { css } from "@emotion/react";
 import theme from "../../styles/theme";
-
-const override = css`
-  display: block;
-  margin: 0 auto;
-  border-color: red;
-`;
 
 interface RecipeInputSubmitProps {
   loading: boolean;
@@ -21,7 +14,7 @@ export default function RecipeInputSubmit({
     <>
       <div>
         <BarLoader
-          css={override}
+          css={"display: block; margin: 0 auto; border-color: red"}
           height=".4rem"
           width="100%"
           color={theme.color.brand.base}
@@ -29,7 +22,7 @@ export default function RecipeInputSubmit({
           speedMultiplier={1}
         />
       </div>
-      <button onClick={() => submitRecipe}>Create Recipe</button>
+      <button onClick={submitRecipe}>Create Recipe</button>
       <style jsx>{`
         div {
           width: 35rem;
