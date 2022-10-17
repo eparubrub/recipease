@@ -36,13 +36,13 @@ export default function RecipeInputDropdown({
         label {
           font-family: "Nunito";
           font-weight: 600;
-          color: var(--color-brand);
+          color: ${theme.color.brand.base};
           font-size: 1.3rem;
         }
         select {
-          color: var(--color-brand);
+          color: ${theme.color.brand.base};
           border-style: solid;
-          border-color: var(--color-brand);
+          border-color: ${theme.color.brand.base};
           min-height: 2rem;
           width: 100%;
           border-radius: 0.5rem;
@@ -51,17 +51,21 @@ export default function RecipeInputDropdown({
           border-width: 0.13rem;
           text-indent: 0.2rem;
           appearance: none;
-          text-indent: 5px;
+          text-indent: 0.3rem;
           background-image: linear-gradient(
               45deg,
               transparent 50%,
-              var(--color-brand) 50%
+              ${theme.color.brand.base} 50%
             ),
-            linear-gradient(135deg, var(--color-brand) 50%, transparent 50%),
+            linear-gradient(
+              135deg,
+              ${theme.color.brand.base} 50%,
+              transparent 50%
+            ),
             linear-gradient(
               to right,
-              var(--color-brand-30-transparent),
-              var(--color-brand-30-transparent)
+              ${theme.color.brand.faded},
+              ${theme.color.brand.faded}
             );
           background-position: calc(100% - 1.21rem) calc(0.8rem),
             calc(100% - 0.9rem) calc(0.8rem), 100% 0;
@@ -71,14 +75,18 @@ export default function RecipeInputDropdown({
         select:focus {
           background-image: linear-gradient(
               45deg,
-              var(--color-white) 50%,
+              ${theme.color.background.white} 50%,
               transparent 50%
             ),
-            linear-gradient(135deg, transparent 50%, var(--color-white) 50%),
+            linear-gradient(
+              135deg,
+              transparent 50%,
+              ${theme.color.background.white} 50%
+            ),
             linear-gradient(
               to right,
-              var(--color-brand-30-transparent),
-              var(--color-brand-30-transparent)
+              ${theme.color.brand.faded},
+              ${theme.color.brand.faded}
             );
           background-position: calc(100% - 0.9rem) 0.8rem,
             calc(100% - 1.21rem) 0.8rem, 100% 0;

@@ -24,7 +24,7 @@ export default function RecipeInputSubmit({
           css={override}
           height=".4rem"
           width="100%"
-          color={"var(--color-brand)"}
+          color={theme.color.brand.base}
           loading={loading}
           speedMultiplier={1}
         />
@@ -35,10 +35,10 @@ export default function RecipeInputSubmit({
           width: 35rem;
         }
         button {
-          color: var(--color-white);
+          color: ${theme.color.background.white};
           border-style: solid;
-          border-color: var(--color-brand);
-          background-color: var(--color-brand);
+          border-color: ${theme.color.brand.base};
+          background-color: ${theme.color.brand.base};
           width: 11.25rem;
           height: 2.5rem;
           border-radius: 0.6rem;

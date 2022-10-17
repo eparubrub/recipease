@@ -18,7 +18,7 @@ export function Button({ children, onClickFunction, customLeft }: ButtonProps) {
       </div>
       <style jsx>{`
         button {
-          border-radius: 20px;
+          border-radius: 1.25rem;
           border-style: solid;
           border-color: ${theme.color.brand.base};
           background-color: ${theme.color.brand.base};

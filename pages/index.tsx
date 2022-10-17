@@ -117,7 +117,6 @@ export default function AllRecipes() {
           height: auto;
           flex-flow: row wrap;
           justify-content: center;
-          /* border: 2px dashed red; */
         }
 
         /* Responsive
@@ -128,7 +127,7 @@ export default function AllRecipes() {
             right: 0.5rem;
           }
           .recipe-input-wrapper {
-            width: 400px;
+            width: 25rem;
           }
         }
 

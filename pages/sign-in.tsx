@@ -36,9 +36,9 @@ const SignIn = () => {
           font-size: 2.5rem;
         }
         input {
-          color: var(--color-brand);
+          color: ${theme.color.brand.base};
           border-style: solid;
-          border-color: var(--color-brand);
+          border-color: ${theme.color.brand.base};
           width: 25rem;
           height: 2.5rem;
           border-radius: 0.6rem;
@@ -47,10 +47,10 @@ const SignIn = () => {
           border-width: 0.15rem;
         }
         button {
-          color: var(--color-white);
+          color: ${theme.color.background.white};
           border-style: solid;
-          border-color: var(--color-brand);
-          background-color: var(--color-brand);
+          border-color: ${theme.color.brand.base};
+          background-color: ${theme.color.brand.base};
           width: 11.2rem;
           height: 2.5rem;
           border-radius: 0.6rem;

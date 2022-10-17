@@ -15,8 +15,8 @@ const getDeleteButton = (
         </button>
         <style jsx>{`
           button {
-            font-size: 0.5em;
-            border-radius: 20px;
+            font-size: 0.5rem;
+            border-radius: 1.25rem;
           }
         `}</style>
       </>

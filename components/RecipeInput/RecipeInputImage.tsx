@@ -1,3 +1,5 @@
+import theme from "../../styles/theme";
+
 interface RecipeInputImageProps {
   chooseFileId: string;
   /* TODO: find what the type is for selectImage */
@@ -27,14 +29,15 @@ export default function RecipeInputImage({
         label {
           font-family: "Nunito";
           font-weight: 600;
-          color: var(--color-brand);
+          color: ${theme.color.brand.base};
           font-size: 1.3rem;
           display: inline-block;
           width: 100%;
-          height: 100%;
+          height: 1.9rem;
           border-radius: 0.8rem;
         }
         p {
+          height: 1.9rem;
           font-size: 0.8rem;
           border-radius: 0.47rem;
           margin: 0;
@@ -44,16 +47,16 @@ export default function RecipeInputImage({
           cursor: pointer;
         }
         p:hover {
-          background-color: var(--color-brand-30-transparent);
-          border-radius: 0px;
+          background-color: ${theme.color.brand.faded};
+          border-radius: 0;
         }
         input[type="file"] {
           display: none;
         }
         .recipe-img-input {
-          color: var(--color-brand);
+          color: ${theme.color.brand.base};
           border-style: solid;
-          border-color: var(--color-brand);
+          border-color: ${theme.color.brand.base};
           height: 2.8rem;
           width: 100%;
           border-radius: 0.5rem;
@@ -62,12 +65,12 @@ export default function RecipeInputImage({
           border-width: 0.13rem;
           text-indent: 0;
         }
-        @media screen and (max-width: 1150px) {
+        @media screen and (max-width: ${theme.layout.breakPoints.medium}) {
           div {
             width: 25rem;
           }
         }
-        @media screen and (max-width: 800px) {
+        @media screen and (max-width: ${theme.layout.breakPoints.small}) {
           div {
             width: 15rem;
           }

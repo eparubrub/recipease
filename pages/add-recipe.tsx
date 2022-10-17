@@ -43,11 +43,11 @@ export default function AddRecipe() {
   const [ingredients, setIngredients] = useState<string>();
   const [ingredientCount, setIngredientCount] = useState<string>();
   const [name, setName] = useState<string>();
-  const [img] = useState();
+  const [img, setImg] = useState(null);
 
   const setImage = (selectImage) => {
     if (selectImage.target.files[0]) {
-      this.setState({ img: selectImage.target.files[0] });
+      setImg(selectImage.target.files[0]);
       document.getElementById(
         "choose-file"
       ).innerHTML = `File chosen: ${selectImage.target.files[0].name}`;
@@ -56,8 +56,8 @@ export default function AddRecipe() {
 
   const uploadImage = (size) => {
     return new Promise((resolve, reject) => {
-      resizeFile(this.state.img, size).then((newImageUri) => {
-        const newImageName = `${this.state.img.name}_${size}x${size}.jpeg`;
+      resizeFile(img, size).then((newImageUri) => {
+        const newImageName = `${img.name}_${size}x${size}.jpeg`;
         const newImageRef = ref(storage, `/images/${newImageName}`);
         uploadString(newImageRef, newImageUri, "data_url")
           .then((snapshot) => {
@@ -99,18 +99,18 @@ export default function AddRecipe() {
   };
 
   const createRecipe = async () => {
-    this.setLoading(true);
-    const image400 = await this.uploadImage(400);
-    const image680 = await this.uploadImage(680);
+    setLoading(true);
+    const image400 = await uploadImage(400);
+    const image680 = await uploadImage(680);
     await addDoc(collection(db, "recipes"), {
-      cookingTime: this.state.cookingTime,
-      cuisine: this.state.cuisine,
-      diet: this.state.diet,
-      difficulty: this.state.difficulty,
-      directions: this.state.directions,
-      ingredients: this.state.ingredients,
-      ingredientCount: Number(this.state.ingredientCount),
-      name: this.state.name,
+      cookingTime: cookingTime,
+      cuisine: cuisine,
+      diet: diet,
+      difficulty: difficulty,
+      directions: directions,
+      ingredients: ingredients,
+      ingredientCount: Number(ingredientCount),
+      name: name,
       imgSmall: image400,
       imgBig: image680,
       likes: 0,
@@ -141,7 +141,7 @@ export default function AddRecipe() {
       </Navbar>
       <div
         className="middle-centered-container"
-        style={{ paddingBottom: "50px" }}
+        style={{ paddingBottom: "3rem" }}
       >
         <div className="add-recipe-middle-wrapper">
           <RecipeInputText
@@ -210,7 +210,6 @@ export default function AddRecipe() {
           flex-direction: column;
           align-items: center;
           margin-top: 1.5rem;
-          /* border: 2px dashed red; */
         }
         .recipe-upload-text {
           text-indent: 0;
