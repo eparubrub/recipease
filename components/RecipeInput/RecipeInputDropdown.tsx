@@ -43,7 +43,7 @@ export default function RecipeInputDropdown({
           color: ${theme.color.brand.base};
           border-style: solid;
           border-color: ${theme.color.brand.base};
-          min-height: 2rem;
+          height: 2.5rem;
           width: 100%;
           border-radius: 0.5rem;
           margin-top: 0.5rem;
@@ -67,8 +67,8 @@ export default function RecipeInputDropdown({
               ${theme.color.brand.faded},
               ${theme.color.brand.faded}
             );
-          background-position: calc(100% - 1.21rem) calc(0.8rem),
-            calc(100% - 0.9rem) calc(0.8rem), 100% 0;
+          background-position: calc(100% - 1.21rem) 1rem,
+            calc(100% - 0.9rem) 1rem, 100% 0;
           background-size: 0.32rem 0.32rem, 0.32rem 0.32rem, 2.5em 2.5em;
           background-repeat: no-repeat;
         }
@@ -88,8 +88,8 @@ export default function RecipeInputDropdown({
               ${theme.color.brand.faded},
               ${theme.color.brand.faded}
             );
-          background-position: calc(100% - 0.9rem) 0.8rem,
-            calc(100% - 1.21rem) 0.8rem, 100% 0;
+          background-position: calc(100% - 0.9rem) 1rem,
+            calc(100% - 1.21rem) 1rem, 100% 0;
           background-size: 0.3rem 0.3rem, 0.3rem 0.3rem, 2.5em 2.5em;
           background-repeat: no-repeat;
           border-color: rgb(0, 133, 84);

@@ -40,16 +40,16 @@ export default function RecipeInputText({
         label {
           font-family: "Nunito";
           font-weight: 600;
-          color: var(--color-brand);
+          color: ${theme.color.brand.base};
           font-size: 1.3rem;
         }
         input,
         textarea {
-          color: var(--color-brand);
+          color: ${theme.color.brand.base};
           border-style: solid;
-          border-color: var(--color-brand);
-          height: 2rem;
-          width: 100%;
+          border-color: ${theme.color.brand.base};
+          height: 2.3rem;
+          width: 99%;
           border-radius: 0.5rem;
           margin-top: 0.5rem;
           font-size: 1rem;
@@ -58,7 +58,7 @@ export default function RecipeInputText({
         }
         textarea {
           font-family: "Nunito", sans-serif;
-          width: 98%;
+          width: 98.5%;
           height: 5rem;
         }
         @media screen and (max-width: ${theme.layout.breakPoints.medium}) {

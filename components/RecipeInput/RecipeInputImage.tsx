@@ -65,7 +65,7 @@ export default function RecipeInputImage({
           border-style: solid;
           border-color: ${theme.color.brand.base};
           height: 2.8rem;
-          width: 100%;
+          width: 99.3%;
           border-radius: 0.5rem;
           margin-top: 0.5rem;
           font-size: 1rem;
