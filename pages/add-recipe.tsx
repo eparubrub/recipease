@@ -58,8 +58,6 @@ export default function AddRecipe() {
         uploadString(newImageRef, newImageUri as string, "data_url")
           .then((snapshot) => {
             getDownloadURL(snapshot.ref).then((url) => {
-              // console.log("snapshot:", snapshot.ref)
-              // console.log('File available at', url);
               const imageInfo = {
                 path: snapshot.ref.fullPath,
                 url: url,
@@ -97,7 +95,7 @@ export default function AddRecipe() {
   const createRecipe = async () => {
     console.log("testing from create recipe");
     setLoading(true);
-    const image400 = await uploadImage(400);
+    const image350 = await uploadImage(350);
     const image680 = await uploadImage(680);
     await addDoc(collection(db, "recipes"), {
       cookingTime: cookingTime,
@@ -108,7 +106,7 @@ export default function AddRecipe() {
       ingredients: ingredients,
       ingredientCount: Number(ingredientCount),
       name: name,
-      imgSmall: image400,
+      imgSmall: image350,
       imgBig: image680,
       likes: 0,
     })

@@ -116,6 +116,11 @@ export function Recipe({ details, id, deleteRecipe }: RecipeProps) {
           flex-direction: column;
           position: relative;
         }
+        .recipe-container-small:hover,
+        .recipe-container-small:hover * {
+          cursor: pointer;
+          background-color: ${theme.color.brand.faded};
+        }
         .recipe-image {
           height: 11.5rem;
           width: 11.5rem;

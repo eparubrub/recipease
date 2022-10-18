@@ -3,7 +3,7 @@ const theme = {
     brand: {
       base: "#406343",
       alt: "#52734d",
-      faded: "#4063434d",
+      faded: "#B3BEB4",
     },
     background: {
       base: "#ecead8",
