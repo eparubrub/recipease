@@ -2,7 +2,7 @@ import React from "react";
 import theme from "../styles/theme";
 import { signInWithGoogle } from "../lib/firebase";
 
-const SignIn = () => {
+export default function SignIn() {
   function handleButton() {
     let userPassword = (document.getElementById("password") as HTMLInputElement)
       .value;
@@ -45,6 +45,7 @@ const SignIn = () => {
           margin: 0.6rem;
           font-size: 1rem;
           border-width: 0.15rem;
+          padding-left: 0.2rem;
         }
         button {
           color: ${theme.color.background.white};
@@ -96,6 +97,4 @@ const SignIn = () => {
       `}</style>
     </div>
   );
-};
-
-export default SignIn;
+}

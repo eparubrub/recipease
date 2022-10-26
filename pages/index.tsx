@@ -91,11 +91,21 @@ export default function AllRecipes() {
         <div className="middle-centered-container">
           <div className="all-recipes-middle-wrapper">
             {Object.keys(recipes).map((key) => (
-              <Recipe
-                id={key}
-                details={recipes[key]}
-                deleteRecipe={deleteRecipe}
-              />
+              <Link
+                key={key}
+                href={{
+                  pathname: "/recipe-viewer",
+                  query: recipes[key], // the data
+                }}
+              >
+                <a>
+                  <Recipe
+                    id={key}
+                    details={recipes[key]}
+                    deleteRecipe={deleteRecipe}
+                  />
+                </a>
+              </Link>
             ))}
           </div>
         </div>
