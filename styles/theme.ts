@@ -15,6 +15,7 @@ const theme = {
       // error: "rgba(227, 82, 58, 0.0625)",
       // float: "#fff",
     },
+    text: {},
   },
   // elevation: {
   //   one: {

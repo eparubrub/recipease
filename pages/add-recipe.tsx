@@ -8,9 +8,10 @@ import RecipeInputText from "../components/RecipeInput/RecipeInputText";
 import RecipeInputDropdown from "../components/RecipeInput/RecipeInputDropdown";
 import RecipeInputImage from "../components/RecipeInput/RecipeInputImage";
 import RecipeInputSubmit from "../components/RecipeInput/RecipeInputSubmit";
-import { Navbar } from "../components/Navbar";
+import { Navbar } from "../components/Navbar/Navbar";
 import theme from "../styles/theme";
 import Router from "next/router";
+import { BackButton } from "../components/Navbar/BackButton";
 
 const resizeFile = (file, size) =>
   new Promise((resolve) => {
@@ -95,7 +96,7 @@ export default function AddRecipe() {
   const createRecipe = async () => {
     console.log("testing from create recipe");
     setLoading(true);
-    const image350 = await uploadImage(350);
+    const image300 = await uploadImage(300);
     const image680 = await uploadImage(680);
     await addDoc(collection(db, "recipes"), {
       cookingTime: cookingTime,
@@ -106,7 +107,7 @@ export default function AddRecipe() {
       ingredients: ingredients,
       ingredientCount: Number(ingredientCount),
       name: name,
-      imgSmall: image350,
+      imgSmall: image300,
       imgBig: image680,
       likes: 0,
     })
@@ -126,13 +127,7 @@ export default function AddRecipe() {
   return (
     <div>
       <Navbar pageName="Add Recipe">
-        <Link href="/">
-          <img
-            src={"/images/back-arrow.png"}
-            className="navbar-back"
-            alt="back icon"
-          />
-        </Link>
+        <BackButton />
       </Navbar>
       <div
         className="middle-centered-container"

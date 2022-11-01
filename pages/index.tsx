@@ -5,7 +5,7 @@ import { Recipe } from "../components/Recipe";
 import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
 import Router from "next/router";
 import { signOutWithGoogle } from "../lib/firebase";
-import { Navbar } from "../components/Navbar";
+import { Navbar } from "../components/Navbar/Navbar";
 import MockRecipe from "../lib/MockRecipe";
 import { ref, deleteObject } from "firebase/storage";
 import { Button } from "../components/Button";
@@ -95,7 +95,11 @@ export default function AllRecipes() {
                 key={key}
                 href={{
                   pathname: "/recipe-viewer",
-                  query: recipes[key], // the data
+                  query: {
+                    ...recipes[key],
+                    imgBig: recipes[key].imgBig.url,
+                    imgSmall: recipes[key].imgSmall.url,
+                  }, // the data
                 }}
               >
                 <a>

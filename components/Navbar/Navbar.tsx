@@ -1,12 +1,13 @@
 import React from "react";
-import theme from "../styles/theme";
+import theme from "../../styles/theme";
 
 interface NavbarProps {
   pageName: string;
   children: React.ReactNode;
+  removeLine?: boolean;
 }
 
-export function Navbar({ pageName, children }: NavbarProps) {
+export function Navbar({ pageName, children, removeLine }: NavbarProps) {
   return (
     <>
       <div className="navbar-container">
@@ -14,7 +15,7 @@ export function Navbar({ pageName, children }: NavbarProps) {
           <div className="navbar-center-text">{pageName}</div>
           {children}
         </div>
-        <div className="navbar-bottom" />
+        {removeLine ? null : <div className="navbar-bottom" />}
       </div>
       <style jsx>{`
         .navbar-container {
