@@ -30,16 +30,32 @@ export default function ViewerSection({
         }
         h3 {
           font-weight: 700;
-          font-size: 1.7rem;
+          font-size: 2rem;
           font-family: ${theme.fontFamily.base};
         }
         p {
           font-weight: 500;
-          font-size: 1rem;
+          font-size: 1.7rem;
         }
         .recipe-container {
           width: 90%;
           border: 0.2rem solid blue;
+        }
+        @media screen and (max-width: ${theme.layout.breakPoints.large}) {
+          h3 {
+            font-size: 1.7rem;
+          }
+          p {
+            font-size: 1.5rem;
+          }
+        }
+        @media screen and (max-width: ${theme.layout.breakPoints.small}) {
+          h3 {
+            font-size: 1.5rem;
+          }
+          p {
+            font-size: 1.2rem;
+          }
         }
       `}</style>
     </div>

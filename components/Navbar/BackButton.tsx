@@ -17,19 +17,6 @@ export function BackButton({}) {
           position: absolute;
           cursor: pointer;
         }
-        @media screen and (max-width: ${theme.layout.breakPoints.medium}) {
-          img {
-            height: 30%;
-            left: 0.625rem;
-          }
-        }
-
-        @media screen and (max-width: ${theme.layout.breakPoints.small}) {
-          img {
-            height: 30%;
-            left: 0.625rem;
-          }
-        }
       `}</style>
     </>
   );

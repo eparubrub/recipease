@@ -19,7 +19,7 @@ export function Navbar({ pageName, children, removeLine }: NavbarProps) {
       </div>
       <style jsx>{`
         .navbar-container {
-          height: 10vh;
+          height: 7rem;
           position: -webkit-sticky;
           position: sticky;
         }
@@ -37,7 +37,7 @@ export function Navbar({ pageName, children, removeLine }: NavbarProps) {
           transform: translate(-50%, -50%);
           font-family: "Nunito";
           font-weight: 600;
-          font-size: 2.5em;
+          font-size: 2.5rem;
           color: ${theme.color.brand.base};
         }
         .navbar-bottom {
@@ -45,10 +45,25 @@ export function Navbar({ pageName, children, removeLine }: NavbarProps) {
           height: 0.6vh;
           bottom: 0;
         }
-        @media screen and (max-width: ${theme.layout
-            .breakPoints} max-height: ${theme.layout.breakPoints.small}) {
+        @media screen and (max-width: ${theme.layout.breakPoints.large}) {
+          .navbar-container {
+            height: 6rem;
+          }
           .navbar-center-text {
-            font-size: 1.5rem;
+            font-size: 2rem;
+          }
+        }
+        @media screen and (max-width: ${theme.layout.breakPoints.medium}) {
+          .navbar-container {
+            height: 5rem;
+          }
+        }
+        @media screen and (max-width: ${theme.layout.breakPoints.small}) {
+          .navbar-container {
+            height: 4rem;
+          }
+          .navbar-center-text {
+            font-size: 1.7rem;
           }
         }
       `}</style>

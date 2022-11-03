@@ -34,12 +34,23 @@ export default function ViewerOverview({
       <style jsx>{`
         div {
           margin: 2rem 3rem 1rem 3rem;
+          height: 8rem;
         }
         h2 {
           margin-bottom: 1rem;
           font-weight: 700;
-          font-size: 1.4rem;
+          font-size: 2rem;
           font-family: ${theme.fontFamily.base};
+        }
+        @media screen and (max-width: ${theme.layout.breakPoints.large}) {
+          h2 {
+            font-size: 1.7rem;
+          }
+        }
+        @media screen and (max-width: ${theme.layout.breakPoints.small}) {
+          h2 {
+            font-size: 1.5rem;
+          }
         }
       `}</style>
     </div>
@@ -67,14 +78,30 @@ export function ViewerOverviewData({
           align-items: center;
         }
         img {
-          width: 1.6rem;
+          width: 2rem;
           margin-right: 0.5rem;
         }
         p {
           margin: 0rem;
           text-align: center;
-          font-size: 1.2rem;
+          font-size: 1.7rem;
           font-family: ${theme.fontFamily.base};
+        }
+        @media screen and (max-width: ${theme.layout.breakPoints.large}) {
+          img {
+            width: 1.7rem;
+          }
+          p {
+            font-size: 1.5rem;
+          }
+        }
+        @media screen and (max-width: ${theme.layout.breakPoints.small}) {
+          img {
+            width: 1.5rem;
+          }
+          p {
+            font-size: 1.2rem;
+          }
         }
       `}</style>
     </>

@@ -4,8 +4,9 @@ import { Navbar } from "../components/Navbar/Navbar";
 import Link from "next/link";
 import { BackButton } from "../components/Navbar/BackButton";
 import ViewerSection from "../components/RecipeViewer/ViewerSection";
-import ViewerMain from "../components/RecipeViewer/ViewerMain";
+import ViewerImage from "../components/RecipeViewer/ViewerImage";
 import ViewerOverview from "../components/RecipeViewer/ViewerOverview";
+import theme from "../styles/theme";
 
 export default function RecipeViewer() {
   const router = useRouter();
@@ -13,13 +14,16 @@ export default function RecipeViewer() {
   console.log(data);
   return (
     <div>
-      <Navbar pageName="" removeLine>
+      <Navbar pageName={String(data.name)} removeLine>
         <BackButton />
       </Navbar>
       <div className="main-wrapper">
         <div className="container">
           <div className="viewer-column">
-            <ViewerMain title={String(data.name)} image={String(data.imgBig)} />
+            <ViewerImage
+              title={String(data.name)}
+              image={String(data.imgBig)}
+            />
             <ViewerOverview
               cookingTime={String(data.cookingTime)}
               cuisine={String(data.cuisine)}
@@ -45,25 +49,24 @@ export default function RecipeViewer() {
           </div>
         </div>
       </div>
-
       <style jsx>{`
         .container {
-          width: 90%;
+          width: 95%;
         }
 
         .viewer-column {
-          width: 40%;
+          width: 50%;
           float: left;
-          height: 50rem;
+          height: auto;
         }
 
         .right {
-          width: 59%;
           float: right;
         }
 
         .directions {
-          margin-left: 2rem;
+          margin-left: 4rem;
+          margin-top: 4rem;
         }
 
         .main-wrapper {
@@ -73,8 +76,17 @@ export default function RecipeViewer() {
           flex-direction: column;
           align-items: center;
           margin-top: 1.5rem;
-           {
-            /* background-color: #fc7777; */
+        }
+        @media screen and (max-width: ${theme.layout.breakPoints.medium}) {
+          .main-wrapper {
+            margin-top: 0rem;
+          }
+          .viewer-column {
+            width: 100%;
+          }
+          .directions {
+            margin-left: 3rem;
+            margin-top: 3rem;
           }
         }
       `}</style>
