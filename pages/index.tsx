@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { auth, db, storage } from "../lib/firebase";
 import Link from "next/link";
 import { Recipe } from "../components/Recipe";
@@ -13,6 +13,8 @@ import theme from "../styles/theme";
 
 export default function AllRecipes() {
   const [recipes, setRecipes] = useState<object>({});
+  const [showSidebar, setShowSidebar] = useState<boolean>();
+  const sidebar = useRef(null);
 
   const addTestRecipe = async () => {
     const sampleRecipe = MockRecipe();
@@ -67,26 +69,33 @@ export default function AllRecipes() {
       populateFromFirebase();
     }
     const user = sessionStorage.getItem("user");
-  });
+    if (!showSidebar) return;
+    function handleClick(event) {
+      if (sidebar.current && !sidebar.current.contains(event.target)) {
+        setShowSidebar(false);
+      }
+    }
+    window.addEventListener("click", handleClick);
+    // clean up
+    return () => window.removeEventListener("click", handleClick);
+  }, [showSidebar]);
 
   return (
     <>
       <div>
         <Navbar pageName="All Recipes">
-          <Button onClickFunction={signOutWithGoogle}>Sign Out</Button>
-          <Button onClickFunction={addTestRecipe} customLeft="8rem">
-            Test Data
-          </Button>
-          <Button onClickFunction={populateFromFirebase} customLeft="15rem">
-            Firebase
-          </Button>
-          <Link href="/add-recipe">
+          <div className="navbar-option left">
             <img
-              className="navbar-add-recipe"
-              src={"/images/add-recipe.png"}
-              alt="add recipe icon"
-            />
-          </Link>
+              onClick={() => setShowSidebar(true)}
+              src={"/images/stripes.png"}
+              alt="sidebar select"
+            ></img>
+          </div>
+          <div className="navbar-option right">
+            <Link href="/add-recipe">
+              <img src={"/images/add-recipe.png"} alt="add recipe icon" />
+            </Link>
+          </div>
         </Navbar>
         <div className="middle-centered-container">
           <div className="all-recipes-middle-wrapper">
@@ -114,15 +123,80 @@ export default function AllRecipes() {
           </div>
         </div>
       </div>
+      <div className="overlay">
+        <div className="sidenav" ref={sidebar}>
+          <ul>
+            <li>
+              <div onClick={addTestRecipe}>Test Data</div>
+            </li>
+            <li>
+              <div onClick={populateFromFirebase}>Firebase</div>
+            </li>
+            <li className="sidenav-bottom">
+              <div onClick={signOutWithGoogle}>Sign Out</div>
+            </li>
+          </ul>
+        </div>
+      </div>
       <style jsx>{`
         img {
-          height: 40%;
-          top: 0;
-          bottom: 0;
-          margin: auto;
-          right: 1.25rem;
+          max-height: 100%;
+          max-width: 100%;
+          float: right;
+        }
+
+        ul {
+          padding: 0;
+          list-style: none;
+        }
+
+        ul li {
+          cursor: pointer;
+          margin: 2rem;
+          transition: all 500ms;
+          font-size: 1.7rem;
+          color: ${theme.color.brand.base};
+          font-weight: 600;
+          font-family: ${theme.fontFamily.base};
+        }
+
+        .navbar-option {
+          width: 3rem;
+          height: 3rem;
           position: absolute;
           cursor: pointer;
+          margin-top: 2rem;
+        }
+
+        .left {
+          left: 1.5rem;
+        }
+
+        .right {
+          right: 1.5rem;
+        }
+
+        .overlay {
+          position: fixed;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          background-color: rgba(0, 0, 0, 0.5);
+          display: ${showSidebar ? "block" : "none"};
+        }
+
+        .sidenav {
+          position: absolute;
+          top: 0;
+          left: 0;
+          bottom: 0;
+          width: 15rem;
+        }
+
+        .sidenav-bottom {
+          position: fixed;
+          bottom: 1rem;
         }
 
         .all-recipes-middle-wrapper {
@@ -135,10 +209,17 @@ export default function AllRecipes() {
 
         /* Responsive
         ----------------------------- */
+        @media screen and (max-width: ${theme.layout.breakPoints.large}) {
+          .navbar-option {
+            height: 2.5rem;
+            margin-top: 1.5rem;
+          }
+        }
+
         @media screen and (max-width: ${theme.layout.breakPoints.medium}) {
-          img {
-            height: 30%;
-            right: 0.5rem;
+          .navbar-option {
+            height: 2rem;
+            margin-top: 1rem;
           }
           .recipe-input-wrapper {
             width: 25rem;
@@ -146,9 +227,8 @@ export default function AllRecipes() {
         }
 
         @media screen and (max-width: ${theme.layout.breakPoints.small}) {
-          img {
-            height: 30%;
-            right: 0.5rem;
+          .navbar-option {
+            height: 1.5rem;
           }
         }
       `}</style>
