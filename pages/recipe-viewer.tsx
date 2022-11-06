@@ -65,8 +65,7 @@ export default function RecipeViewer() {
         }
 
         .directions {
-          margin-left: 4rem;
-          margin-top: 4rem;
+          margin: 2rem 3rem 1rem 3rem;
         }
 
         .main-wrapper {
@@ -85,8 +84,7 @@ export default function RecipeViewer() {
             width: 100%;
           }
           .directions {
-            margin-left: 3rem;
-            margin-top: 3rem;
+            margin: 3rem 1.5rem 1rem 1.5rem;
           }
         }
       `}</style>

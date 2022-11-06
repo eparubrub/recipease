@@ -19,7 +19,7 @@ export default function ViewerOverview({
   return (
     <div>
       <h2>Overview</h2>
-      <DataList grid gapLarge="1.5rem .5rem" gridWidth="100%" gridHeight="2rem">
+      <DataList grid gap="1.5rem .5rem" gridWidth="100%" gridHeight="2rem">
         <ViewerOverviewData
           data={cookingTime}
           iconPath={"/images/cook-time.png"}
@@ -45,6 +45,11 @@ export default function ViewerOverview({
         @media screen and (max-width: ${theme.layout.breakPoints.large}) {
           h2 {
             font-size: 1.7rem;
+          }
+        }
+        @media screen and (max-width: ${theme.layout.breakPoints.medium}) {
+          div {
+            margin: 2rem 1.5rem 1rem 1.5rem;
           }
         }
         @media screen and (max-width: ${theme.layout.breakPoints.small}) {

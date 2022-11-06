@@ -41,7 +41,7 @@ export default function ViewerImage({ title, image }: ViewerImageProps) {
         }
         @media screen and (max-width: ${theme.layout.breakPoints.medium}) {
           div {
-            margin: 0rem 3rem 1rem 3rem;
+            margin: 0rem 1.5rem 1rem 1.5rem;
           }
           img {
             height: 30rem;

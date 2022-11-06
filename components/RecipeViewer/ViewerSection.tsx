@@ -22,7 +22,7 @@ export default function ViewerSection({
       <p>{children}</p>
       <style jsx>{`
         div {
-          margin-bottom: 4rem;
+          margin-bottom: 2rem;
         }
         img {
           max-height: 1.5rem;

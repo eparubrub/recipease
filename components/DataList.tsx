@@ -2,8 +2,7 @@ import theme from "../styles/theme";
 
 interface DataListProps {
   children: React.ReactNode;
-  gapSmall?: string;
-  gapLarge?: string;
+  gap?: string;
   grid?: boolean;
   gridWidth?: string;
   gridHeight?: string;
@@ -11,8 +10,7 @@ interface DataListProps {
 
 export function DataList({
   children,
-  gapSmall,
-  gapLarge,
+  gap,
   grid,
   gridWidth,
   gridHeight,
@@ -26,7 +24,7 @@ export function DataList({
           flex-wrap: wrap;
           grid-auto-flow: column;
           grid-auto-rows: 1fr;
-          gap: ${gapSmall};
+          gap: ${gap};
           margin: "1.5rem auto 0";
           padding: 0;
           max-width: 80rem;
@@ -34,7 +32,7 @@ export function DataList({
         .grid {
           --n: 2; /* number of columns */
           display: grid;
-          grid-gap: ${gapSmall};
+          grid-gap: ${gap};
           grid-template-columns: repeat(
             auto-fit,
             minmax(calc(100% / var(--n) - 20px), 1fr)
@@ -46,9 +44,6 @@ export function DataList({
           .data-list {
             padding: 0;
             margin: 0;
-          }
-          .grid {
-            grid-gap: ${gapLarge};
           }
         }
       `}</style>
