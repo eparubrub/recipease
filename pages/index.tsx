@@ -93,7 +93,11 @@ export default function AllRecipes() {
           </div>
           <div className="navbar-option right">
             <Link href="/add-recipe">
-              <img src={"/images/add-recipe.png"} alt="add recipe icon" />
+              <img
+                src={"/images/add-recipe.png"}
+                alt="add recipe icon"
+                style={{ float: "right" }}
+              />
             </Link>
           </div>
         </Navbar>
@@ -122,27 +126,36 @@ export default function AllRecipes() {
             ))}
           </div>
         </div>
-      </div>
-      <div className="overlay">
-        <div className="sidenav" ref={sidebar}>
-          <ul>
-            <li>
-              <div onClick={addTestRecipe}>Test Data</div>
-            </li>
-            <li>
-              <div onClick={populateFromFirebase}>Firebase</div>
-            </li>
-            <li className="sidenav-bottom">
-              <div onClick={signOutWithGoogle}>Sign Out</div>
-            </li>
-          </ul>
+        <div className="overlay">
+          <div className="sidenav" ref={sidebar}>
+            <div className="sidenav-top">
+              <img
+                onClick={() => setShowSidebar(false)}
+                src={"/images/chef-hat.png"}
+                alt="logo"
+              ></img>
+            </div>
+            <ul>
+              <li>
+                <div onClick={addTestRecipe}>Test Data</div>
+              </li>
+              <li>
+                <div onClick={populateFromFirebase}>Firebase</div>
+              </li>
+              <li className="sidenav-bottom">
+                <div onClick={signOutWithGoogle}>Sign Out</div>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
       <style jsx>{`
         img {
           max-height: 100%;
           max-width: 100%;
-          float: right;
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
         }
 
         ul {
@@ -182,8 +195,12 @@ export default function AllRecipes() {
           right: 0;
           bottom: 0;
           left: 0;
+          visibility: ${showSidebar ? "visible" : "hidden"};
+          opacity: ${showSidebar ? 1 : 0};
           background-color: rgba(0, 0, 0, 0.5);
-          display: ${showSidebar ? "block" : "none"};
+          -webkit-transition: opacity 1s, visibility 1s;
+          transition: "opacity" 1s, "visibility" 1s;
+          transition: "background-color" 1s ease;
         }
 
         .sidenav {
@@ -191,7 +208,13 @@ export default function AllRecipes() {
           top: 0;
           left: 0;
           bottom: 0;
-          width: 15rem;
+          width: 12rem;
+          border-radius: 0 2rem 2rem 0;
+        }
+
+        .sidenav-top {
+          margin-top: 3rem;
+          height: 2.5rem;
         }
 
         .sidenav-bottom {
