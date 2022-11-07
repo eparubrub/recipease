@@ -198,9 +198,9 @@ export default function AllRecipes() {
           visibility: ${showSidebar ? "visible" : "hidden"};
           opacity: ${showSidebar ? 1 : 0};
           background-color: rgba(0, 0, 0, 0.5);
-          -webkit-transition: opacity 1s, visibility 1s;
-          transition: "opacity" 1s, "visibility" 1s;
-          transition: "background-color" 1s ease;
+          -webkit-transition: opacity 0.5s, visibility 0.5s;
+          transition: "opacity" 0.5s, "visibility" 0.5s;
+          transition: "background-color" 0.5s ease;
         }
 
         .sidenav {

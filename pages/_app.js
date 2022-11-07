@@ -1,8 +1,9 @@
 import globalStyles from "../styles/global";
-import { AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Head from "next/head";
 
-function App({ Component, pageProps }) {
+function App({ Component, pageProps, router }) {
+  const url = `http://localhost${router.route}`;
   return (
     <>
       <Head>
@@ -14,9 +15,22 @@ function App({ Component, pageProps }) {
           rel="stylesheet"
         />
       </Head>
-      <AnimatePresence>
+      <motion.div
+        key={router.route}
+        initial="initial"
+        animate="animate"
+        transition={{ duration: 0.5 }}
+        variants={{
+          initial: {
+            opacity: 0,
+          },
+          animate: {
+            opacity: 1,
+          },
+        }}
+      >
         <Component {...pageProps} />
-      </AnimatePresence>
+      </motion.div>
       <style jsx global>
         {globalStyles}
       </style>
