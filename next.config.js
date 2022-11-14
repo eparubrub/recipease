@@ -10,4 +10,7 @@ module.exports = {
     REACT_APP_PASSWORD: process.env.REACT_APP_PASSWORD,
     REACT_APP_DEV_OR_ENV: process.env.REACT_APP_DEV_OR_ENV,
   },
+  images: {
+    domains: ["firebasestorage.googleapis.com"],
+  },
 };

@@ -1,27 +1,41 @@
 import React from "react";
 import { useRouter } from "next/router";
 import theme from "../../styles/theme";
+import Image from "next/image";
 
 interface ViewerImageProps {
   title: string;
-  image: string;
+  imgBig: string;
+  imgSmall: string;
 }
 
-export default function ViewerImage({ title, image }: ViewerImageProps) {
+export default function ViewerImage({
+  title,
+  imgSmall,
+  imgBig,
+}: ViewerImageProps) {
   return (
-    <div>
+    <div className="viewer-container">
       <h2>{title}</h2>
-      <img style={{ backgroundImage: "url(" + image + ")" }}></img>
+      <div className="img-container">
+        <Image
+          src={imgBig}
+          alt="recipe-image"
+          objectFit="cover"
+          layout="fill"
+          placeholder="blur"
+          blurDataURL={imgSmall}
+        />
+      </div>
       <style jsx>{`
-        div {
+        .viewer-container {
           margin: 1rem 3rem 1rem 3rem;
         }
-        img {
+        .img-container {
           height: 30rem;
           width: 100%;
-          background-repeat: no-repeat;
-          background-position: center center;
-          background-size: cover;
+          position: relative;
+          overflow: hidden;
           border-radius: ${theme.borderRadius.md};
           margin-left: 0.2rem;
         }

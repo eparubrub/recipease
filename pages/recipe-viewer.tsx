@@ -22,7 +22,8 @@ export default function RecipeViewer() {
           <div className="viewer-column">
             <ViewerImage
               title={String(data.name)}
-              image={String(data.imgBig)}
+              imgSmall={String(data.imgSmall)}
+              imgBig={String(data.imgBig)}
             />
             <ViewerOverview
               cookingTime={String(data.cookingTime)}

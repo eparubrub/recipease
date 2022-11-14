@@ -101,7 +101,10 @@ export default function AllRecipes() {
             </Link>
           </div>
         </Navbar>
-        <div className="middle-centered-container">
+        <div
+          className="middle-centered-container"
+          style={{ marginTop: "1rem" }}
+        >
           <div className="all-recipes-middle-wrapper">
             {Object.keys(recipes).map((key) => (
               <Link

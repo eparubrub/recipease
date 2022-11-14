@@ -1,5 +1,6 @@
 import React from "react";
 import theme from "../styles/theme";
+import Image from "next/image";
 
 const getDeleteButton = (
   deleteFunction: Function,
@@ -45,11 +46,15 @@ interface RecipeProps {
 export function Recipe({ details, id, deleteRecipe }: RecipeProps) {
   return (
     <>
-      <div className="recipe-container-small">
-        <div
-          className="recipe-image"
-          style={{ backgroundImage: "url(" + details.imgSmall.url + ")" }}
-        ></div>
+      <div className="recipe-container">
+        <div className="img-container">
+          <Image
+            src={details.imgSmall.url}
+            alt="recipe-image"
+            objectFit="cover"
+            layout="fill"
+          />
+        </div>
         <div className="recipe-data-container">
           <h3>{details.name}</h3>
           <div className="recipe-split-columns">
@@ -103,45 +108,38 @@ export function Recipe({ details, id, deleteRecipe }: RecipeProps) {
           left: 0.5rem;
           display: inline-block;
         }
-        .recipe-container-small {
-          height: 12.5rem;
-          width: 34.5rem;
-          min-height: 12.5rem;
-          min-width: 34.5rem;
-          border-radius: 1.25rem;
-          border: 0.2rem solid ${theme.color.brand.base};
+        .recipe-container {
+          height: 12rem;
+          width: 35rem;
+          border-radius: 1rem;
+          border: 0.35rem solid ${theme.color.brand.base};
           margin: 0.5rem;
           display: flex;
-          /* justify-content: center; */
           flex-direction: column;
           position: relative;
         }
-        .recipe-container-small:hover,
-        .recipe-container-small:hover * {
+        .recipe-container:hover,
+        .recipe-container:hover * {
           cursor: pointer;
           background-color: ${theme.color.brand.faded};
         }
-        .recipe-image {
-          height: 11.5rem;
-          width: 11.5rem;
-          position: absolute;
-          left: 0;
-          top: 0;
-          padding: 0.5rem;
-          border-radius: 1rem 0 0 1rem; /* top left, top right, bottom right, bottom left */
-          border-right: 0.3rem solid ${theme.color.brand.base};
-          background-repeat: no-repeat;
-          background-position: center center;
-          background-size: cover;
+        .img-container {
+          height: 100%;
+          width: 14.3rem;
+          position: relative;
+          overflow: hidden;
+          border-radius: 0.45rem 0 0 0.45rem; /* top left, top right, bottom right, bottom left */
         }
         .recipe-data-container {
           /* display: flex;
           flex-direction:column; */
+          padding-left: 1rem;
           position: absolute;
           width: 20rem;
           height: 100%;
           right: 0.5rem;
           border-radius: 0 1rem 1rem 0;
+          border-left: 0.3rem solid ${theme.color.brand.base};
         }
         .recipe-split-columns {
           display: flex;
@@ -165,20 +163,17 @@ export function Recipe({ details, id, deleteRecipe }: RecipeProps) {
             font-size: 0.5rem;
             left: 0.25rem;
           }
-          .recipe-container-small {
-            height: 6.25rem;
-            width: 17.25rem;
-            min-height: 6.25rem;
-            min-width: 17.25rem;
+          .img-container {
+            width: 7.5rem;
+            border-radius: 0.6rem 0 0 0.6rem;
           }
-          .recipe-image {
-            height: 5.75rem;
-            width: 5.75rem;
-            padding: 0.25rem;
-            border-right: 0.15rem solid ${theme.color.brand.base};
+          .recipe-container {
+            height: 6rem;
+            width: 18rem;
+            border: 0.25rem solid ${theme.color.brand.base};
           }
           .recipe-data-container {
-            width: 10rem;
+            width: 9rem;
             height: 100%;
             right: 0.25rem;
           }
