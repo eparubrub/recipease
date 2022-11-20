@@ -1,5 +1,7 @@
 {
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
-  "editor.formatOnPaste": false
+  "editor.formatOnPaste": false,
+  "git.ignoreLimitWarning": true,
+  "terminal.integrated.defaultProfile.osx": "zsh"
 }

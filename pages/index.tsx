@@ -13,8 +13,9 @@ import theme from "../styles/theme";
 
 export default function AllRecipes() {
   const [recipes, setRecipes] = useState<object>({});
-  const [showSidebar, setShowSidebar] = useState<boolean>();
+  const [showSidebar, setShowSidebar] = useState<boolean>(false);
   const sidebar = useRef(null);
+  const sidebarSelect = useRef(null);
 
   const addTestRecipe = async () => {
     const sampleRecipe = MockRecipe();
@@ -69,9 +70,10 @@ export default function AllRecipes() {
       populateFromFirebase();
     }
     const user = sessionStorage.getItem("user");
-    if (!showSidebar) return;
     function handleClick(event) {
-      if (sidebar.current && !sidebar.current.contains(event.target)) {
+      if (!showSidebar && sidebarSelect.current.contains(event.target)) {
+        setShowSidebar(true);
+      } else if (sidebar.current && !sidebar.current.contains(event.target)) {
         setShowSidebar(false);
       }
     }
@@ -84,12 +86,8 @@ export default function AllRecipes() {
     <>
       <div>
         <Navbar pageName="All Recipes">
-          <div className="navbar-option left">
-            <img
-              onClick={() => setShowSidebar(true)}
-              src={"/images/stripes.png"}
-              alt="sidebar select"
-            ></img>
+          <div className="navbar-option left" ref={sidebarSelect}>
+            <img src={"/images/stripes.png"} alt="sidebar select"></img>
           </div>
           <div className="navbar-option right">
             <Link href="/add-recipe">
