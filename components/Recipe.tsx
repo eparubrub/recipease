@@ -25,25 +25,27 @@ const getDeleteButton = (
   }
 };
 
+export interface RecipeDetailsProps {
+  cuisine: string;
+  cookingTime: string;
+  diet: string;
+  difficulty: string;
+  directions: string;
+  ingredients: { id: number; name: string }[];
+  ingredientCount: number;
+  likes: string;
+  name: string;
+  imgSmall: { url: string; path: string };
+  imgBig: { url: string; path: string };
+}
+
 interface RecipeProps {
-  details: {
-    cuisine: string;
-    cookingTime: string;
-    diet: string;
-    difficulty: string;
-    directions: string;
-    ingredients: string;
-    ingredientCount: number;
-    likes: string;
-    name: string;
-    imgSmall: { url: string; path: string };
-    imgBig: { url: string; path: string };
-  };
+  details: RecipeDetailsProps;
   deleteRecipe: Function;
   id: string;
 }
 
-export function Recipe({ details, id, deleteRecipe }: RecipeProps) {
+export default function Recipe({ details, id, deleteRecipe }: RecipeProps) {
   return (
     <>
       <div className="recipe-container">

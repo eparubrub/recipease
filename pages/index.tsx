@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { auth, db, storage } from "../lib/firebase";
 import Link from "next/link";
-import { Recipe } from "../components/Recipe";
+import Recipe from "../components/Recipe";
 import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
 import Router from "next/router";
 import { signOutWithGoogle } from "../lib/firebase";
@@ -29,7 +29,6 @@ export default function AllRecipes() {
       const newImageRef = ref(storage, imgPath);
       deleteObject(newImageRef)
         .then(() => {
-          // console.log("Deleted image at " + imgPath + " successfully")
           resolve();
         })
         .catch((error) => {

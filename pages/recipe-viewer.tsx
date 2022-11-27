@@ -7,46 +7,65 @@ import ViewerSection from "../components/RecipeViewer/ViewerSection";
 import { db } from "../lib/firebase";
 import ViewerImage from "../components/RecipeViewer/ViewerImage";
 import { doc, getDoc, collection, getDocs } from "firebase/firestore";
-
+import { NextPageContext } from "next";
+import MockRecipe from "../lib/MockRecipe";
+import { RecipeDetailsProps } from "../components/Recipe";
 import ViewerOverview from "../components/RecipeViewer/ViewerOverview";
 import theme from "../styles/theme";
 
-export default function RecipeViewer() {
-  const [pageData, setPageData] = useState<object>({});
-  const router = useRouter();
-  const data = router.query;
+export const getServerSideProps = async (context: NextPageContext) => {
+  const { query } = context;
+  return { props: { query } };
+};
+
+export default function RecipeViewer(props) {
+  const { query } = props;
+  const [pageData, setPageData] = useState<{
+    ingredients: { id: number; name: string }[];
+  }>(null);
 
   const pullData = async (recipeId) => {
-    const docRef = await doc(db, "recipes", recipeId);
-    const docSnap = await getDoc(docRef);
-    const docData = docSnap.data();
-    setPageData(docData);
+    if (recipeId === "TEST") {
+      const mockTestData = MockRecipe();
+      setPageData(mockTestData);
+    } else {
+      const docRef = await doc(db, "recipes", recipeId);
+      const docSnap = await getDoc(docRef);
+      const docData = docSnap.data();
+      const recipeDetails = {
+        ingredients: docData.ingredients,
+      };
+      setPageData(recipeDetails);
+    }
   };
 
   useEffect(() => {
-    if (!router.query.recipeId) {
+    if (!query.recipeId) {
       return;
+    } else if (query.imgSmall === "/images/sample-food-image.png") {
+      pullData("TEST");
+      return; // return if it's testdata
     }
-    pullData(router.query.recipeId);
-  }, [router]);
+    pullData(query.recipeId);
+  }, [query]);
   return (
     <div>
-      <Navbar pageName={String(data.name)} removeLine>
+      <Navbar pageName={String(query.name)} removeLine>
         <BackButton />
       </Navbar>
       <div className="main-wrapper">
         <div className="container">
           <div className="viewer-column">
             <ViewerImage
-              title={String(data.name)}
-              imgSmall={String(data.imgSmall)}
-              imgBig={String(data.imgBig)}
+              title={String(query.name)}
+              imgSmall={String(query.imgSmall)}
+              imgBig={String(query.imgBig)}
             />
             <ViewerOverview
-              cookingTime={String(data.cookingTime)}
-              cuisine={String(data.cuisine)}
-              diet={String(data.diet)}
-              difficulty={String(data.difficulty)}
+              cookingTime={String(query.cookingTime)}
+              cuisine={String(query.cuisine)}
+              diet={String(query.diet)}
+              difficulty={String(query.difficulty)}
             />
           </div>
           <div className="viewer-column right">
@@ -55,13 +74,15 @@ export default function RecipeViewer() {
                 SectionTitle="Ingredients"
                 SectionIconPath="/images/ingredients.png"
               >
-                {data.ingredients}
+                {pageData !== null
+                  ? pageData.ingredients.map((ing) => <div>{ing.name}</div>)
+                  : null}
               </ViewerSection>
               <ViewerSection
                 SectionTitle="Directions"
                 SectionIconPath="/images/cook.png"
               >
-                {data.directions}
+                {query.directions}
               </ViewerSection>
             </div>
           </div>

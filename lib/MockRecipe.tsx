@@ -20,10 +20,11 @@ const MockRecipe = () => {
       ],
     id: recipeId,
     ingredientCount: Math.floor(Math.random() * 20),
-    ingredients:
-      testdata.ingredients[
-        Math.floor(Math.random() * testdata.ingredients.length)
-      ],
+    ingredients: [
+      { id: 0, name: "flour" },
+      { id: 1, name: "sugar" },
+      { id: 2, name: "banana" },
+    ],
     likes: Math.floor(Math.random() * 1000),
     name: testdata.name[Math.floor(Math.random() * testdata.name.length)],
     imgSmall: {
