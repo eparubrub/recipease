@@ -1,15 +1,36 @@
 {
   "cookingTime": [
-    "5 minutes", "10 minutes", "15 minutes", "30 minutes", "45 minutes",
-    "1 hour", "1.5 hour", "2 hours", "2.5 hours", "3 hours",
+    "5 minutes",
+    "10 minutes",
+    "15 minutes",
+    "30 minutes",
+    "45 minutes",
+    "1 hour",
+    "1.5 hour",
+    "2 hours",
+    "2.5 hours",
+    "3 hours",
     "3 hours+"
   ],
   "cuisine": [
-    "French", "Italian", "Greek", "Mediterranean", "Lebanese", "Moroccan", 
-    "Turkish",  "Thai", "Indian", "Chinese", "Japanese", "Korean", 
-    "Hawaiian", "Fusion"
+    "French",
+    "Italian",
+    "Greek",
+    "Mediterranean",
+    "Lebanese",
+    "Moroccan",
+    "Turkish",
+    "Thai",
+    "Indian",
+    "Chinese",
+    "Japanese",
+    "Korean",
+    "Hawaiian",
+    "Fusion"
   ],
-  "diet": ["Vegan", "Vegetarian", "Pescatarian", "Keto"],
+  "diet": ["Non-Veg", "Vegetarian", "Vegan"],
   "difficulty": ["Very Easy", "Easy", "Medium", "Hard", "Very Hard"],
-  "ingredientCount": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+  "ingredientCount": [
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
+  ]
 }

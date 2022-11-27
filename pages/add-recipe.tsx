@@ -12,6 +12,7 @@ import { Navbar } from "../components/Navbar/Navbar";
 import theme from "../styles/theme";
 import Router from "next/router";
 import { BackButton } from "../components/Navbar/BackButton";
+import RecipeInputIngredients from "../components/RecipeInput/RecipeInputIngredients";
 
 const resizeFile = (file, size) =>
   new Promise((resolve) => {
@@ -37,8 +38,7 @@ export default function AddRecipe() {
   const [diet, setDiet] = useState<string>();
   const [difficulty, setDifficulty] = useState<string>();
   const [directions, setDirections] = useState<string>();
-  const [ingredients, setIngredients] = useState<string>();
-  const [ingredientCount, setIngredientCount] = useState<string>();
+  const [ingredients, setIngredients] = useState([{ id: 0, name: "" }]);
   const [name, setName] = useState<string>();
   const [img, setImg] = useState(null);
 
@@ -75,14 +75,27 @@ export default function AddRecipe() {
     });
   };
 
+  const addIngredientInput = () => {
+    let emptyInput = {
+      id: ingredients.length,
+      name: "",
+    };
+    setIngredients([...ingredients, emptyInput]);
+  };
+
+  const updateIngredientInput = (index, newName) => {
+    let newIngredientsInput = ingredients;
+    newIngredientsInput[index].name = newName;
+    setIngredients(ingredients);
+  };
+
   const resetForm = () => {
     setCookingTime("");
     setCuisine("");
     setDiet("");
     setDifficulty("");
     setDirections("");
-    setIngredients("");
-    setIngredientCount("");
+    setIngredients([{ id: 0, name: "" }]);
     setName("");
     setImage(null);
     let inputs = document.getElementsByClassName("recipe-input");
@@ -94,7 +107,6 @@ export default function AddRecipe() {
   };
 
   const createRecipe = async () => {
-    console.log("testing from create recipe");
     setLoading(true);
     const image300 = await uploadImage(300);
     const image680 = await uploadImage(680);
@@ -105,7 +117,7 @@ export default function AddRecipe() {
       difficulty: difficulty,
       directions: directions,
       ingredients: ingredients,
-      ingredientCount: Number(ingredientCount),
+      ingredientCount: ingredients.length,
       name: name,
       imgSmall: image300,
       imgBig: image680,
@@ -121,6 +133,7 @@ export default function AddRecipe() {
       )
       .catch(function (error) {
         console.error("Error adding document: ", error);
+        setLoading(false);
       });
   };
 
@@ -138,22 +151,6 @@ export default function AddRecipe() {
             recipeName="Name"
             recipePlaceholder="Haulolo"
             recipeEvent={setName}
-          />
-          <RecipeInputText
-            recipeName="Ingredients"
-            recipePlaceholder="Rice"
-            recipeEvent={setIngredients}
-          />
-          <RecipeInputDropdown
-            recipeName="Ingredient Count"
-            recipeOptions={defaults.ingredientCount}
-            recipeEvent={setIngredientCount}
-            currentVal={ingredientCount}
-          />
-          <RecipeInputText
-            recipeName="Directions"
-            recipePlaceholder="Cook this"
-            recipeEvent={setDirections}
           />
           <RecipeInputDropdown
             recipeName="Cooking Time"
@@ -178,6 +175,17 @@ export default function AddRecipe() {
             recipeOptions={defaults.diet}
             recipeEvent={setDiet}
             currentVal={diet}
+          />
+          <RecipeInputIngredients
+            recipeName="Ingredients"
+            inputList={ingredients}
+            recipeIngredientAdd={addIngredientInput}
+            recipeIngredientUpdate={updateIngredientInput}
+          />
+          <RecipeInputText
+            recipeName="Directions"
+            recipePlaceholder="Cook this"
+            recipeEvent={setDirections}
           />
           <RecipeInputImage chooseFileId="choose-file" setImage={setImage} />
           <RecipeInputSubmit loading={loading} submitRecipe={createRecipe} />

@@ -65,10 +65,16 @@ export default function RecipeInputText({
           div {
             width: 25rem;
           }
+          textarea {
+            max-width: 25rem;
+          }
         }
         @media screen and (max-width: ${theme.layout.breakPoints.small}) {
           div {
             width: 15rem;
+          }
+          textarea {
+            max-width: 15rem;
           }
         }
       `}</style>

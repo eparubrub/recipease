@@ -1,17 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { Navbar } from "../components/Navbar/Navbar";
 import Link from "next/link";
 import { BackButton } from "../components/Navbar/BackButton";
 import ViewerSection from "../components/RecipeViewer/ViewerSection";
+import { db } from "../lib/firebase";
 import ViewerImage from "../components/RecipeViewer/ViewerImage";
+import { doc, getDoc, collection, getDocs } from "firebase/firestore";
+
 import ViewerOverview from "../components/RecipeViewer/ViewerOverview";
 import theme from "../styles/theme";
 
 export default function RecipeViewer() {
+  const [pageData, setPageData] = useState<object>({});
   const router = useRouter();
   const data = router.query;
-  console.log(data);
+
+  const pullData = async (recipeId) => {
+    const docRef = await doc(db, "recipes", recipeId);
+    const docSnap = await getDoc(docRef);
+    const docData = docSnap.data();
+    setPageData(docData);
+  };
+
+  useEffect(() => {
+    if (!router.query.recipeId) {
+      return;
+    }
+    pullData(router.query.recipeId);
+  }, [router]);
   return (
     <div>
       <Navbar pageName={String(data.name)} removeLine>

@@ -113,7 +113,8 @@ export default function AllRecipes() {
                     ...recipes[key],
                     imgBig: recipes[key].imgBig.url,
                     imgSmall: recipes[key].imgSmall.url,
-                  }, // the data
+                    recipeId: key,
+                  },
                 }}
               >
                 <a>
@@ -136,17 +137,25 @@ export default function AllRecipes() {
                 alt="logo"
               ></img>
             </div>
-            <ul>
-              <li>
-                <div onClick={addTestRecipe}>Test Data</div>
-              </li>
-              <li>
-                <div onClick={populateFromFirebase}>Firebase</div>
-              </li>
-              <li className="sidenav-bottom">
-                <div onClick={signOutWithGoogle}>Sign Out</div>
-              </li>
-            </ul>
+            {process.env.REACT_APP_DEV_OR_ENV == "dev" ? (
+              <ul>
+                <li>
+                  <div onClick={addTestRecipe}>Test Data</div>
+                </li>
+                <li>
+                  <div onClick={populateFromFirebase}>Firebase</div>
+                </li>
+                <li className="sidenav-bottom">
+                  <div onClick={signOutWithGoogle}>Sign Out</div>
+                </li>
+              </ul>
+            ) : (
+              <ul>
+                <li className="sidenav-bottom">
+                  <div onClick={signOutWithGoogle}>Sign Out</div>
+                </li>
+              </ul>
+            )}
           </div>
         </div>
       </div>
