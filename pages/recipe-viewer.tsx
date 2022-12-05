@@ -12,6 +12,7 @@ import MockRecipe from "../lib/MockRecipe";
 import { RecipeDetailsProps } from "../components/Recipe";
 import ViewerOverview from "../components/RecipeViewer/ViewerOverview";
 import theme from "../styles/theme";
+import ViewerIngredient from "../components/RecipeViewer/ViewerIngredient";
 
 export const getServerSideProps = async (context: NextPageContext) => {
   const { query } = context;
@@ -24,17 +25,18 @@ export default function RecipeViewer(props) {
     ingredients: { id: number; name: string }[];
   }>(null);
 
-  const pullData = async (recipeId) => {
+  const pullData = async (recipeId: string) => {
     if (recipeId === "TEST") {
       const mockTestData = MockRecipe();
       setPageData(mockTestData);
     } else {
-      const docRef = await doc(db, "recipes", recipeId);
+      const docRef = doc(db, "recipes", recipeId);
       const docSnap = await getDoc(docRef);
       const docData = docSnap.data();
       const recipeDetails = {
         ingredients: docData.ingredients,
       };
+      console.log(recipeDetails);
       setPageData(recipeDetails);
     }
   };
@@ -43,8 +45,8 @@ export default function RecipeViewer(props) {
     if (!query.recipeId) {
       return;
     } else if (query.imgSmall === "/images/sample-food-image.png") {
-      pullData("TEST");
-      return; // return if it's testdata
+      pullData("TEST"); // use generated testdata
+      return;
     }
     pullData(query.recipeId);
   }, [query]);
@@ -75,7 +77,9 @@ export default function RecipeViewer(props) {
                 SectionIconPath="/images/ingredients.png"
               >
                 {pageData !== null
-                  ? pageData.ingredients.map((ing) => <div>{ing.name}</div>)
+                  ? pageData.ingredients.map((ing) => (
+                      <ViewerIngredient ingredient={ing} />
+                    ))
                   : null}
               </ViewerSection>
               <ViewerSection
